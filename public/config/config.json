@@ -1,18 +1,19 @@
 {
-  "CONTRACT_ADDRESS": "0x827acb09a2dc20e39c9aad7f7190d9bc53534192",
-  "SCAN_LINK": "https://polygonscan.com/token/0x827acb09a2dc20e39c9aad7f7190d9bc53534192",
+  "CONTRACT_ADDRESS": "0xf091014028E53793a43F98E9B63C74f51c4FEC93",
+  "SCAN_LINK": "https://polygonscan.com/address/0xf091014028e53793a43f98e9b63c74f51c4fec93",
   "NETWORK": {
     "NAME": "Polygon",
     "SYMBOL": "Matic",
     "ID": 137
   },
-  "NFT_NAME": "Nerdy Coder Clones",
-  "SYMBOL": "NCC",
-  "MAX_SUPPLY": 1000,
-  "WEI_COST": 75000000000000000,
-  "DISPLAY_COST": 0.075,
+  "NFT_NAME": "BaeBee",
+  "SYMBOL": "BAEBEE",
+  "MAX_SUPPLY": 5000,
+  "WEI_COST": 500000000000000,
+  "DISPLAY_COST": 0.0005,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/nerdy-coder-clones",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/baebee",
   "SHOW_BACKGROUND": true
 }
+
