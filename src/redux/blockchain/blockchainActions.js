@@ -5,6 +5,7 @@ import Web3 from "web3";
 import { fetchData } from "../data/dataActions";
 import NodeWalletConnect from "@walletconnect/node";
 import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 // Create connector
 const walletConnector = new NodeWalletConnect(
@@ -20,6 +21,11 @@ const walletConnector = new NodeWalletConnect(
     },
   }
 );
+
+//  Create WalletConnect Provider
+const provider = new WalletConnectProvider({
+  infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+});
 
 const connectRequest = () => {
   return {
@@ -104,13 +110,12 @@ export const connect = () => {
         dispatch(connectFailed("Something went wrong."));
       }
     } else {
-      dispatch(connectFailed("Install Metamask."));
-      // Check if connection is already established
 if (!walletConnector.connected) {
   // create new session
   walletConnector.createSession().then(() => {
     // get uri for QR Code modal
     const uri = walletConnector.uri;
+    console.log(uri)
     // display QR Code modal
     WalletConnectQRCodeModal.open(
       uri,
@@ -124,6 +129,7 @@ if (!walletConnector.connected) {
 
 // Subscribe to connection events
 walletConnector.on("connect", (error, payload) => {
+  console.log(payload)
   if (error) {
     throw error;
   }
@@ -152,7 +158,61 @@ walletConnector.on("disconnect", (error, payload) => {
   }
 
   // Delete walletConnector
+  // Add listeners start
+  walletConnector.on("accountsChanged", (accounts) => {
+    dispatch(updateAccount(accounts[0]));
+  });
+  walletConnector.on("chainChanged", (chainId) => {
+    console.log(chainId);
+  });
 });
+
+if (!walletConnector.connected) {
+  dispatch(connectFailed("Install Metamask."));
+  // Check if connection is already established
+} else {
+  dispatch(connectFailed("Metamask Mobile Connected."));
+  //  Enable session (triggers QR Code modal)
+  const abiResponse = await fetch("/config/abi.json", {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  const abi = await abiResponse.json();
+  const configResponse = await fetch("/config/config.json", {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  await provider.enable();
+  const CONFIG = await configResponse.json();
+  const web3 = await new Web3(provider);
+  await Web3EthContract.setProvider(web3);
+  try {
+    const accounts = await web3.eth.getAccounts();
+    const networkId = await web3.eth.net.getId();
+    if (networkId == CONFIG.NETWORK.ID) {
+      const SmartContractObj = new Web3EthContract(
+        abi,
+        CONFIG.CONTRACT_ADDRESS
+      );
+      dispatch(
+        connectSuccess({
+          account: accounts[0],
+          smartContract: SmartContractObj,
+          web3: web3,
+        })
+      );
+      // Add listeners end
+    } else {
+      dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}. + NetID${CONFIG.NETWORK.ID} + ${networkId}`));
+    }
+  } catch (err) {
+    dispatch(connectFailed("Something went wrong." + err));
+  }
+}
     }
   };
 };

@@ -4,6 +4,22 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
+import NodeWalletConnect from "@walletconnect/node";
+
+// Create connector
+const walletConnector = new NodeWalletConnect(
+  {
+    bridge: "https://bridge.walletconnect.org", // Required
+  },
+  {
+    clientMeta: {
+      description: "WalletConnect NodeJS Client",
+      url: "https://nodejs.org/en/",
+      icons: ["https://nodejs.org/static/images/logo.svg"],
+      name: "WalletConnect",
+    },
+  }
+);
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -128,27 +144,50 @@ function App() {
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
-    blockchain.smartContract.methods
-      .mint(mintAmount)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-      });
+    if (window.screen.width <= 1280) {
+        const uri = walletConnector.uri;
+        console.log(uri)
+        const tx = {
+            from: blockchain.account,
+            to: CONFIG.CONTRACT_ADDRESS,
+            gasPrice: totalGasLimit,
+            value: totalCostWei,
+        };
+        // Send transaction
+walletConnector.sendTransaction(tx).then((result) => {
+  // Returns transaction id (hash)
+  console.log(result); 
+  setFeedback(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`);
+  setClaimingNft(false);
+  dispatch(fetchData(blockchain.account)) }).catch((error) => {
+  // Error returned when rejected
+  console.error(error);
+  setFeedback("Sorry, something went wrong please try again later." + error);
+  setClaimingNft(false);
+})
+        } else {
+          blockchain.smartContract.methods
+          .mint(mintAmount)
+          .send({
+            gasLimit: String(totalGasLimit),
+            to: CONFIG.CONTRACT_ADDRESS,
+            from: blockchain.account,
+            value: totalCostWei,
+          })
+          .once("error", (err) => {
+            console.log(err);
+            setFeedback("Sorry, something went wrong please try again later.");
+            setClaimingNft(false);
+          })
+          .then((receipt) => {
+            console.log(receipt);
+            setFeedback(
+              `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+            );
+            setClaimingNft(false);
+            dispatch(fetchData(blockchain.account));
+          });
+        }
   };
 
   const decrementMintAmount = () => {
