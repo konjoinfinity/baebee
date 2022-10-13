@@ -11,19 +11,19 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { providers } from "ethers";
 
 // Create connector
-const walletConnector = new NodeWalletConnect(
-  {
-    bridge: "https://bridge.walletconnect.org", // Required
-  },
-  {
-    clientMeta: {
-      description: "WalletConnect NodeJS Client",
-      url: "https://nodejs.org/en/",
-      icons: ["https://nodejs.org/static/images/logo.svg"],
-      name: "WalletConnect",
-    },
-  }
-);
+// const walletConnector = new NodeWalletConnect(
+//   {
+//     bridge: "https://bridge.walletconnect.org", // Required
+//   },
+//   {
+//     clientMeta: {
+//       description: "WalletConnect NodeJS Client",
+//       url: "https://nodejs.org/en/",
+//       icons: ["https://nodejs.org/static/images/logo.svg"],
+//       name: "WalletConnect",
+//     },
+//   }
+// );
 
 // //  Create WalletConnect Provider
 // const provider = new WalletConnectProvider({
@@ -34,17 +34,19 @@ const walletConnector = new NodeWalletConnect(
 // const web3Provider = new providers.Web3Provider(provider);
 
 //  Create WalletConnect Provider
-const provider = new WalletConnectProvider({
-  rpc: {
-    137: "https://polygon-rpc.com",
-  },
-});
+// const provider = new WalletConnectProvider({
+//   rpc: {
+//     137: "https://polygon-rpc.com",
+//   },
+// });
 
-const web3 = new Web3(provider);
+// const web3 = new Web3(provider);
 
-web3.givenProvider = web3.currentProvider;
-web3.eth.givenProvider = web3.currentProvider;
-web3.eth.accounts.givenProvider = web3.currentProvider;
+// web3.givenProvider = web3.currentProvider;
+// web3.eth.givenProvider = web3.currentProvider;
+// web3.eth.accounts.givenProvider = web3.currentProvider;
+
+let txreceipt = "";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -169,58 +171,6 @@ function App() {
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
-    if (window.screen.width <= 1280) {
-        // const tx = {
-        //     from: blockchain.account,
-        //     to: CONFIG.CONTRACT_ADDRESS,
-        //     gasPrice: String(gasLimit),
-        //     value: totalCostWei,
-        // };
-     var contractCall = blockchain.smartContract
-contractCall.send({ from: blockchain.account, gas: 2000000 }).then(function(hashdata) {
-                             console.log(hashdata);
-                            var rawTransaction = {
-                                     "from": blockchain.account,
-                                     "gasPrice": String(gasLimit),
-                                     "to": CONFIG.CONTRACT_ADDRESS,
-                                     "value": totalCostWei,
-                                 };
-                                 let tx = new ethereumjs.Tx(rawTransaction);
-                                 let serializedTx = tx.serialize();
-                                 console.log('serializedTx:', serializedTx);
-                                 web3provider.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(err, receipt) {
-                                     if (!err) {
-                                         console.log('success token sent to user: ' + receipt);
-                                         alert('You have received your Tokens in your Wallet');
-                                     } else {
-                                         console.log('error: ' + err);
-                                         alert("An error Occured: " + err);
-                                     }
-                                 });
-})
-        //Send transaction
-        // walletConnector.smartContract.methods
-        // .mint(mintAmount)
-        // .send({
-        //   gasLimit: String(totalGasLimit),
-        //   to: CONFIG.CONTRACT_ADDRESS,
-        //   from: blockchain.account,
-        //   value: totalCostWei,
-        // })
-        // .then((receipt) => {
-        //   console.log(receipt);
-        //   setFeedback(
-        //     `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-        //   );
-        //   setClaimingNft(false);
-        //   dispatch(fetchData(blockchain.account));
-        // }).catch("error", (err) => {
-        //   console.log(err);
-        //   setFeedback("Sorry, something went wrong please try again later.");
-        //   setClaimingNft(false);
-        // })
-        // setFeedback(JSON.stringify(tx));
-        } else {
           blockchain.smartContract.methods
           .mint(mintAmount)
           .send({
@@ -236,13 +186,14 @@ contractCall.send({ from: blockchain.account, gas: 2000000 }).then(function(hash
           })
           .then((receipt) => {
             console.log(receipt);
+            txreceipt = receipt
             setFeedback(
-              `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+              `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it ==> `
             );
             setClaimingNft(false);
             dispatch(fetchData(blockchain.account));
+            console.log(blockchain)
           });
-        }
   };
 
   const decrementMintAmount = () => {
@@ -276,7 +227,7 @@ contractCall.send({ from: blockchain.account, gas: 2000000 }).then(function(hash
     });
     const config = await configResponse.json();
     SET_CONFIG(config);
-    await provider.enable();
+    // await provider.enable();
   };
 
   useEffect(() => {
@@ -330,7 +281,7 @@ contractCall.send({ from: blockchain.account, gas: 2000000 }).then(function(hash
               }}
             >
               <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+                {CONFIG.CONTRACT_ADDRESS}
               </StyledLink>
             </s.TextDescription>
             <s.SpacerSmall />
@@ -409,7 +360,10 @@ contractCall.send({ from: blockchain.account, gas: 2000000 }).then(function(hash
                         color: "var(--accent-text)",
                       }}
                     >
-                      {feedback}
+                      {feedback} 
+                      {txreceipt !== "" ?
+                      <a href={`https://opensea.io/assets/matic/0xf091014028e53793a43f98e9b63c74f51c4fec93/${txreceipt.events.Transfer.returnValues.tokenId}`} target="_blank">Opensea</a>
+                      : ""}
                     </s.TextDescription>
                     <s.SpacerMedium />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
