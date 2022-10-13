@@ -11,7 +11,7 @@
   "MAX_SUPPLY": 5000,
   "WEI_COST": 500000000000000,
   "DISPLAY_COST": 0.0005,
-  "GAS_LIMIT": 285000,
+  "GAS_LIMIT": 8000000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/baebee",
   "SHOW_BACKGROUND": true

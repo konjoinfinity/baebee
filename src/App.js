@@ -5,6 +5,10 @@ import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 import NodeWalletConnect from "@walletconnect/node";
+import Web3 from "web3";
+import Web3EthContract from "web3-eth-contract";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { providers } from "ethers";
 
 // Create connector
 const walletConnector = new NodeWalletConnect(
@@ -20,6 +24,27 @@ const walletConnector = new NodeWalletConnect(
     },
   }
 );
+
+// //  Create WalletConnect Provider
+// const provider = new WalletConnectProvider({
+//   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
+// });
+
+// //  Wrap with Web3Provider from ethers.js
+// const web3Provider = new providers.Web3Provider(provider);
+
+//  Create WalletConnect Provider
+const provider = new WalletConnectProvider({
+  rpc: {
+    137: "https://polygon-rpc.com",
+  },
+});
+
+const web3 = new Web3(provider);
+
+web3.givenProvider = web3.currentProvider;
+web3.eth.givenProvider = web3.currentProvider;
+web3.eth.accounts.givenProvider = web3.currentProvider;
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -145,26 +170,56 @@ function App() {
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     if (window.screen.width <= 1280) {
-        const uri = walletConnector.uri;
-        console.log(uri)
-        const tx = {
-            from: blockchain.account,
-            to: CONFIG.CONTRACT_ADDRESS,
-            gasPrice: totalGasLimit,
-            value: totalCostWei,
-        };
-        // Send transaction
-walletConnector.sendTransaction(tx).then((result) => {
-  // Returns transaction id (hash)
-  console.log(result); 
-  setFeedback(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`);
-  setClaimingNft(false);
-  dispatch(fetchData(blockchain.account)) }).catch((error) => {
-  // Error returned when rejected
-  console.error(error);
-  setFeedback("Sorry, something went wrong please try again later." + error);
-  setClaimingNft(false);
+        // const tx = {
+        //     from: blockchain.account,
+        //     to: CONFIG.CONTRACT_ADDRESS,
+        //     gasPrice: String(gasLimit),
+        //     value: totalCostWei,
+        // };
+     var contractCall = blockchain.smartContract
+contractCall.send({ from: blockchain.account, gas: 2000000 }).then(function(hashdata) {
+                             console.log(hashdata);
+                            var rawTransaction = {
+                                     "from": blockchain.account,
+                                     "gasPrice": String(gasLimit),
+                                     "to": CONFIG.CONTRACT_ADDRESS,
+                                     "value": totalCostWei,
+                                 };
+                                 let tx = new ethereumjs.Tx(rawTransaction);
+                                 let serializedTx = tx.serialize();
+                                 console.log('serializedTx:', serializedTx);
+                                 web3provider.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(err, receipt) {
+                                     if (!err) {
+                                         console.log('success token sent to user: ' + receipt);
+                                         alert('You have received your Tokens in your Wallet');
+                                     } else {
+                                         console.log('error: ' + err);
+                                         alert("An error Occured: " + err);
+                                     }
+                                 });
 })
+        //Send transaction
+        // walletConnector.smartContract.methods
+        // .mint(mintAmount)
+        // .send({
+        //   gasLimit: String(totalGasLimit),
+        //   to: CONFIG.CONTRACT_ADDRESS,
+        //   from: blockchain.account,
+        //   value: totalCostWei,
+        // })
+        // .then((receipt) => {
+        //   console.log(receipt);
+        //   setFeedback(
+        //     `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+        //   );
+        //   setClaimingNft(false);
+        //   dispatch(fetchData(blockchain.account));
+        // }).catch("error", (err) => {
+        //   console.log(err);
+        //   setFeedback("Sorry, something went wrong please try again later.");
+        //   setClaimingNft(false);
+        // })
+        // setFeedback(JSON.stringify(tx));
         } else {
           blockchain.smartContract.methods
           .mint(mintAmount)
@@ -221,6 +276,7 @@ walletConnector.sendTransaction(tx).then((result) => {
     });
     const config = await configResponse.json();
     SET_CONFIG(config);
+    await provider.enable();
   };
 
   useEffect(() => {
