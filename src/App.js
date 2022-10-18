@@ -4,66 +4,36 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import NodeWalletConnect from "@walletconnect/node";
-import Web3 from "web3";
-import Web3EthContract from "web3-eth-contract";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import { providers } from "ethers";
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
-// Create connector
-// const walletConnector = new NodeWalletConnect(
-//   {
-//     bridge: "https://bridge.walletconnect.org", // Required
-//   },
-//   {
-//     clientMeta: {
-//       description: "WalletConnect NodeJS Client",
-//       url: "https://nodejs.org/en/",
-//       icons: ["https://nodejs.org/static/images/logo.svg"],
-//       name: "WalletConnect",
-//     },
-//   }
-// );
+const handleDragStart = (e) => e.preventDefault();
 
-// //  Create WalletConnect Provider
-// const provider = new WalletConnectProvider({
-//   infuraId: "27e484dcd9e3efcfd25a83a78777cdf1",
-// });
-
-// //  Wrap with Web3Provider from ethers.js
-// const web3Provider = new providers.Web3Provider(provider);
-
-//  Create WalletConnect Provider
-// const provider = new WalletConnectProvider({
-//   rpc: {
-//     137: "https://polygon-rpc.com",
-//   },
-// });
-
-// const web3 = new Web3(provider);
-
-// web3.givenProvider = web3.currentProvider;
-// web3.eth.givenProvider = web3.currentProvider;
-// web3.eth.accounts.givenProvider = web3.currentProvider;
+const items = [
+  <img src="https://i.seadn.io/gae/_v-_d-QcL3fB2j96ZxUopcsHwr5WljtdzqIBRp42HRqlq-66d0Fp71aUfKPvhrzX6AoCRP6rc_rIEwqWsoZeRr-uqrWRm6zqP7PdonE?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/8PihCqhVPNZgyaspteya0tg5if_UzfiFSmjI7JwE9Jru9Ui6bdKmE2baYPUWAC2Xy6TlDwkOe1fkTLMCMRQerLPUBATiCVbxUwvpYQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/9aC-6UflX7UFEg9unOIerPstObzSDmoppXg2V6phHsi78KkrGDdioZ_im2-7SD9rqrXrGi5PpfItyRvHUKN7VTS6VJIkMhMOSfPLBhE?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/kZ6lOfyMfWLeV6XF4DaQ5IDot0b1i6brMq6SyoMUmiSWt3a1eNLhdIq8tl1FjF3tvzgOxVbhRT998RvvFijZyUFLAMPyrxQxxHbcSQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/kelXuNv6UZxFH89glmV2VfV4B0lKHkf-hugpXKGVIWjB1SCfTGmQQRwbPo76jNg7HTmLah0VzsYNUFEdshdzjKDZRlxLiQH_ewSXLQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+];
 
 let txreceipt = "";
 
-const truncate = (input, len) =>
-  input.length > len ? `${input.substring(0, len)}...` : input;
-
 export const StyledButton = styled.button`
-  padding: 10px;
+  padding: 35px;
   border-radius: 50px;
   border: none;
   background-color: var(--secondary);
-  padding: 10px;
+  padding: 20px;
+  font-size: 28px;
   font-weight: bold;
-  color: var(--primary-text);
-  width: 100px;
+  color: var(--primary);
+  width: 400px;
   cursor: pointer;
-  box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
+  box-shadow: 0px 10px 0px -2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 6px 0px -2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 6px 0px -2px rgba(0, 0, 0, 0.3);
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -76,19 +46,19 @@ export const StyledRoundButton = styled.button`
   border-radius: 100%;
   border: none;
   background-color: var(--secondary);
-  padding: 10px;
+  padding: 25px;
   font-weight: bold;
-  font-size: 15px;
-  color: var(--primary-text);
+  font-size: 25px;
+  color: var(--primary);
   width: 30px;
   height: 30px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
+  boxShadow: 0px 5px 11px 2px rgba(0,0,0,0.5),
+  -webkit-box-shadow: 0px 5px 11px 2px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 5px 11px 2px rgba(0,0,0,0.5);
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -120,15 +90,44 @@ export const StyledLogo = styled.img`
 export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
   background-color: var(--accent);
-  border-radius: 100%;
-  width: 200px;
-  @media (min-width: 900px) {
-    width: 250px;
-  }
-  @media (min-width: 1000px) {
-    width: 300px;
-  }
-  transition: width 0.5s;
+  border-radius: 20%;
+  width: 500px;
+  margin-right: 250px;
+  margin-bottom: 200px;
+`;
+
+export const StyledBanner = styled.img`
+  height: 900px;
+  margin-right: 200px;
+  margin-left: 200px;
+  margin-top: 30px;
+`;
+
+export const StyledIcon = styled.img`
+  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.3);
+  background-color: var(--accent);
+  border-radius: 20%;
+  width: 50px;
+  padding: 10px;
+  margin: 5px;
+`;
+
+export const StyledSpec = styled.img`
+  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.3);
+  background-color: #FCB1A3;
+  border-radius: 20%;
+  width: 75px;
+  padding: 10px;
+  margin: 5px;
+`;
+
+export const StyledHead = styled.img`
+  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.3);
+  background-color: var(--accent);
+  border-radius: 20%;
+  width: 100px;
+  padding: 15px;
+  margin: 5px;
 `;
 
 export const StyledLink = styled.a`
@@ -140,8 +139,8 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [claimingNFT, setClaimingNFT] = useState(false);
+  const [feedback, setFeedback] = useState(`Click to mint your Toxic Baebee NFT`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -170,7 +169,7 @@ function App() {
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
-    setClaimingNft(true);
+    setClaimingNFT(true);
           blockchain.smartContract.methods
           .mint(mintAmount)
           .send({
@@ -182,7 +181,7 @@ function App() {
           .once("error", (err) => {
             console.log(err);
             setFeedback("Sorry, something went wrong please try again later.");
-            setClaimingNft(false);
+            setClaimingNFT(false);
           })
           .then((receipt) => {
             console.log(receipt);
@@ -190,7 +189,7 @@ function App() {
             setFeedback(
               `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it ==> `
             );
-            setClaimingNft(false);
+            setClaimingNFT(false);
             dispatch(fetchData(blockchain.account));
             console.log(blockchain)
           });
@@ -243,48 +242,71 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ padding: 24, backgroundColor: "var(--primary)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
-      >
-        <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+        style={{ backgroundColor: "#fef5df" }}>
+          <s.Container
+      flex={1}
+            style={{
+              padding: 30,
+              backgroundColor: "#FCB1A3",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}>
+              <s.Container style={{marginRight: "8%"}}>
+              <StyledHead alt={"linkedin"} src={"/config/images/reauty-new-logo-web3-04-1@2x.png"} />
+              </s.Container>
+              <s.Container style={{marginLeft: "80%"}}>
+              <StyledHead alt={"linkedin"} src={"/config/images/menu-bar@2x.svg"} />
+              </s.Container>
+              </s.Container>
+              <s.SpacerLarge />
+              <s.SpacerLarge />
+              <s.SpacerLarge />
+              <s.SpacerLarge />
         <s.SpacerSmall />
+        <s.TextTitle
+              style={{
+                textAlign: "center",
+                fontSize: 50,
+                fontWeight: "bold",
+                color: "var(--accent-text)"
+              }}
+            >
+              TOXIC BAEBEE NFTS
+            </s.TextTitle>
+            <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
-          </s.Container>
           <s.SpacerLarge />
           <s.Container
             flex={2}
             jc={"center"}
             ai={"center"}
             style={{
-              backgroundColor: "var(--accent)",
-              padding: 24,
+              paddingTop: 30,
+              paddingBottom: 30,
+              paddingLeft: 300,
+              paddingRight: 300,
               borderRadius: 24,
-              boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
             <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: 50,
-                fontWeight: "bold",
-                color: "var(--accent-text)",
-              }}
-            >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
-            </s.TextTitle>
-            <s.TextDescription
-              style={{
-                textAlign: "center",
-                color: "var(--primary-text)",
-              }}
-            >
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {CONFIG.CONTRACT_ADDRESS}
-              </StyledLink>
-            </s.TextDescription>
-            <s.SpacerSmall />
+                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "26px" }}
+                >
+                  The Beauty Industry Lacks Transparency And Regulation. Beauty Consumers Are Frustrated With Misleading Information And Exaggerated Marketing Claims.
+                </s.TextTitle>
+            <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "26px" }}
+                >
+This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Many Customers To Obtain Unnecessary Plastic Surgery, Unhealthy Eating Habits, And Unknowingly Use Beauty Products With Toxic Ingredients.
+                </s.TextTitle>
+            <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "26px" }}
+                >
+              The "Toxic Baebee" NFT Series Was Designed To Generate Public Awareness By Illustrating The "Toxic Side Of Beauty".
+                </s.TextTitle>
+            <s.SpacerMedium />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextTitle
@@ -304,30 +326,17 @@ function App() {
               </>
             ) : (
               <>
-                <s.TextTitle
+                {/* <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
                   1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
-                </s.TextTitle>
+                </s.TextTitle> */}
                 <s.SpacerXSmall />
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  Excluding gas fees.
-                </s.TextDescription>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      Connect to the {CONFIG.NETWORK.NAME} network
-                    </s.TextDescription>
                     <s.SpacerSmall />
                     <StyledButton
                       onClick={(e) => {
@@ -336,7 +345,7 @@ function App() {
                         getData();
                       }}
                     >
-                      CONNECT
+                      Connect Your Wallet
                     </StyledButton>
                     {blockchain.errorMsg !== "" ? (
                       <>
@@ -358,6 +367,7 @@ function App() {
                       style={{
                         textAlign: "center",
                         color: "var(--accent-text)",
+                        fontSize: "25px"
                       }}
                     >
                       {feedback} 
@@ -369,7 +379,7 @@ function App() {
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledRoundButton
                         style={{ lineHeight: 0.4 }}
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={claimingNFT ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
                           decrementMintAmount();
@@ -381,14 +391,15 @@ function App() {
                       <s.TextDescription
                         style={{
                           textAlign: "center",
-                          color: "var(--accent-text)",
+                          color: "var(--primary-text)",
+                          fontSize: "25px"
                         }}
                       >
                         {mintAmount}
                       </s.TextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={claimingNFT ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
                           incrementMintAmount();
@@ -400,14 +411,14 @@ function App() {
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={claimingNFT ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNFT ? "BUSY" : "MINT - 25 MATIC"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -421,37 +432,124 @@ function App() {
             <StyledImg
               alt={"example"}
               src={"/config/images/example.gif"}
-              style={{ transform: "scaleX(-1)" }}
             />
           </s.Container>
         </ResponsiveWrapper>
+        <s.SpacerLarge />
+        <s.SpacerLarge />
         <s.SpacerMedium />
-        <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
+        <s.TextTitle
+              style={{
+                textAlign: "center",
+                fontSize: 50,
+                fontWeight: "bold",
+                color: "var(--accent-text)"
+              }}
+            >
+              SPECIFICATIONS
+            </s.TextTitle>
+            <s.SpacerMedium />
+            <s.SpacerMedium />
+        <ResponsiveWrapper flex={1}>
+        <s.Container flex={1}>
+            <StyledBanner
+              alt={"example"}
+              src={"/config/images/toxbbs.png"}
+            />
+          </s.Container>
+          <s.Container
+            flex={2}
             style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
+              paddingTop: 30,
+              paddingBottom: 30,
+              paddingRight: 300,
+              borderRadius: 24,
             }}
           >
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
-          </s.TextDescription>
-          <s.SpacerSmall />
-          <s.TextDescription
+            <s.Container flex={1}>
+            <StyledSpec alt={"linkedin"} src={"/config/images/profile@2x.svg"} />
+            <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "30px" }}
+                >The Characters</s.TextTitle>
+                <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)" }}
+                >
+Each Unique Baebee Is Created By A Program That Generates Over 170 Possible Traits These Include But Are Not Limited To Expression, Headwear And Clothing. Tha Majority Of Baebees Are 2d And 10 Are 3d.
+                </s.TextTitle>
+                </s.Container>
+            <s.SpacerMedium />
+            <s.Container flex={1}>
+            <StyledSpec alt={"linkedin"} src={"/config/images/polygon.png"} />
+            <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "30px" }}
+                >ERC-721</s.TextTitle>
+                <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)" }}
+                >
+The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is Compatible With Any Service Or Exchange, And Purchasing Baebee Costs 25 MATIC - POLYGON.
+                </s.TextTitle>
+                </s.Container>
+            <s.SpacerMedium />
+            <s.Container flex={1}>
+            <StyledSpec alt={"linkedin"} src={"/config/images/utility.png"} />
+            <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "30px" }}
+                >Specialty</s.TextTitle>
+                <s.SpacerMedium />
+            <s.TextTitle
+                  style={{ textAlign: "left", color: "var(--primary-text)" }}
+                >
+              Baebees NFTs are Convertable To Reautycoin (ERC 2.0 Token). We Allow Our NFT Owner To Convert Their NFT To Our Reautycoin, Please Check The Reautycoin Page To Learn More.
+                </s.TextTitle>
+                </s.Container>
+            <s.SpacerMedium />
+            <s.SpacerMedium />
+          </s.Container>
+          <s.SpacerLarge />
+        </ResponsiveWrapper>
+        <s.SpacerLarge />
+        <s.SpacerLarge />
+        <s.TextTitle
+              style={{
+                textAlign: "center",
+                fontSize: 50,
+                fontWeight: "bold",
+                color: "var(--accent-text)"
+              }}
+            >
+              RECENT MINTS
+            </s.TextTitle>
+            <s.SpacerLarge />
+            <AliceCarousel autoWidth={true} mouseTracking items={items} />
+      <s.Container
+      flex={1}
+            jc={"center"}
+            ai={"center"}
             style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
-          </s.TextDescription>
-        </s.Container>
+              padding: 30,
+              backgroundColor: "#FCB1A3",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap"
+            }}>
+<s.TextTitle style={{ textAlign: "left", color: "var(--primary)", fontSize: "30px", marginRight: 500 }}>© Copyright ReautyDAO 2022</s.TextTitle>
+<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Document</s.TextDescription>
+<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Terms Of Service</s.TextDescription>
+<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Traits & Rarities</s.TextDescription>
+<StyledIcon style={{marginLeft: 500}} alt={"linkedin"} src={"/config/images/linkedin@2x.svg"} />
+<StyledIcon alt={"linkedin"} src={"/config/images/twitter@2x.svg"} />
+<StyledIcon alt={"linkedin"} src={"/config/images/twitter@2x.svg"} />
+<StyledIcon alt={"linkedin"} src={"/config/images/linkedin@2x.svg"} />
+</s.Container>
       </s.Container>
-    </s.Screen>
+   </s.Screen>
   );
 }
 
 export default App;
+

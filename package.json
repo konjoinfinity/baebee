@@ -9,6 +9,8 @@
     "@walletconnect/web3-provider": "^1.8.0",
     "ethers": "^5.7.1",
     "react": "^17.0.2",
+    "react-alice-carousel": "^2.6.4",
+    "react-card-slide": "^1.0.13",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
@@ -37,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.55.0"
   }
 }
