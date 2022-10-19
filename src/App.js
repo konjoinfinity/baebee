@@ -255,9 +255,11 @@ function App() {
               flexDirection: "row",
               flexWrap: "wrap",
             }}>
+              <a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
               <s.Container style={{marginRight: "8%"}}>
               <StyledHead alt={"linkedin"} src={"/config/images/reauty-new-logo-web3-04-1@2x.png"} />
               </s.Container>
+              </a>
               </s.Container>
               <s.SpacerLarge />
               <s.SpacerLarge />
