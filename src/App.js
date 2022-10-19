@@ -16,6 +16,9 @@ const items = [
   <img src="https://i.seadn.io/gae/kZ6lOfyMfWLeV6XF4DaQ5IDot0b1i6brMq6SyoMUmiSWt3a1eNLhdIq8tl1FjF3tvzgOxVbhRT998RvvFijZyUFLAMPyrxQxxHbcSQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
   <img src="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
   <img src="https://i.seadn.io/gae/kelXuNv6UZxFH89glmV2VfV4B0lKHkf-hugpXKGVIWjB1SCfTGmQQRwbPo76jNg7HTmLah0VzsYNUFEdshdzjKDZRlxLiQH_ewSXLQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/lQbYb1NyP7LtpkSSQLVln5PKaiAOoNhzfflnu-7cPUMC5hIGSrVgImGkc4Ca5DzZe3lFc4KfeWVUyAkAu5urZvaKN5JILDOYGTAeNw?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/05vPImS1AbUoJlERfli5dZP1xNPJM8qf_LZdZbLKh1641WanVeTefRFH7qGh0N6Yc5RokFT0LrgU7fy0znVcjlqDupJuG_GSOAgL8gY?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
+  <img src="https://i.seadn.io/gae/Og52e2NyyPZKSzpeJMAe7sBIDAoVivIckP_bmEpb-velWeczKl0AethDYIsKEbkwu_6KQG38yWsYgqziwYDbojQcpTYosWqq6dDJWtg?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
 ];
 
 let txreceipt = "";
@@ -104,8 +107,8 @@ export const StyledBanner = styled.img`
 `;
 
 export const StyledIcon = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.3);
-  background-color: var(--accent);
+  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.1);
+  background-color: #F9CFCB;
   border-radius: 20%;
   width: 50px;
   padding: 10px;
@@ -122,7 +125,7 @@ export const StyledSpec = styled.img`
 `;
 
 export const StyledHead = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.1);
   background-color: var(--accent);
   border-radius: 20%;
   width: 100px;
@@ -242,21 +245,18 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ backgroundColor: "#fef5df" }}>
+        style={{ background: "linear-gradient(#FFAB9C, #FEF7E9)" }}>
           <s.Container
       flex={1}
             style={{
               padding: 30,
-              backgroundColor: "#FCB1A3",
+              backgroundColor: "#F9CFCB",
               display: "flex",
               flexDirection: "row",
               flexWrap: "wrap",
             }}>
               <s.Container style={{marginRight: "8%"}}>
               <StyledHead alt={"linkedin"} src={"/config/images/reauty-new-logo-web3-04-1@2x.png"} />
-              </s.Container>
-              <s.Container style={{marginLeft: "80%"}}>
-              <StyledHead alt={"linkedin"} src={"/config/images/menu-bar@2x.svg"} />
               </s.Container>
               </s.Container>
               <s.SpacerLarge />
@@ -269,10 +269,20 @@ function App() {
                 textAlign: "center",
                 fontSize: 50,
                 fontWeight: "bold",
-                color: "var(--accent-text)"
+                color: "var(--primary-text)"
               }}
             >
               TOXIC BAEBEE NFTS
+            </s.TextTitle>
+            <s.TextTitle
+              style={{
+                textAlign: "center",
+                fontSize: 30,
+                fontWeight: "bold",
+                color: "#01CAFF"
+              }}
+            >
+              ________
             </s.TextTitle>
             <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
@@ -372,7 +382,7 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
                     >
                       {feedback} 
                       {txreceipt !== "" ?
-                      <a href={`https://opensea.io/assets/matic/0xf091014028e53793a43f98e9b63c74f51c4fec93/${txreceipt.events.Transfer.returnValues.tokenId}`} target="_blank">Opensea</a>
+                      <a href={`https://opensea.io/assets/matic/0x68e5167252b534ad3a50d559ab61ef6b84e1ee09/${txreceipt.events.Transfer.returnValues.tokenId}`} target="_blank">Opensea</a>
                       : ""}
                     </s.TextDescription>
                     <s.SpacerMedium />
@@ -418,7 +428,7 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
                           getData();
                         }}
                       >
-                        {claimingNFT ? "BUSY" : "MINT - 25 MATIC"}
+                        {claimingNFT ? "MINTING..." : "MINT - 25 MATIC"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -443,7 +453,7 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
                 textAlign: "center",
                 fontSize: 50,
                 fontWeight: "bold",
-                color: "var(--accent-text)"
+                color: "var(--primary-text)"
               }}
             >
               SPECIFICATIONS
@@ -514,18 +524,27 @@ The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is C
         </ResponsiveWrapper>
         <s.SpacerLarge />
         <s.SpacerLarge />
+        <s.SpacerLarge />
         <s.TextTitle
               style={{
                 textAlign: "center",
                 fontSize: 50,
                 fontWeight: "bold",
-                color: "var(--accent-text)"
+                color: "var(--primary-text)"
               }}
             >
               RECENT MINTS
             </s.TextTitle>
             <s.SpacerLarge />
-            <AliceCarousel autoWidth={true} mouseTracking items={items} />
+            <s.SpacerLarge />
+            <AliceCarousel autoWidth={true} paddingLeft={350} disableButtonsControls={true} disableDotsControls={true} mouseTracking items={items} infinite={true} />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
       <s.Container
       flex={1}
             jc={"center"}
@@ -538,13 +557,27 @@ The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is C
               flexWrap: "wrap"
             }}>
 <s.TextTitle style={{ textAlign: "left", color: "var(--primary)", fontSize: "30px", marginRight: 500 }}>© Copyright ReautyDAO 2022</s.TextTitle>
+<a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
 <s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Document</s.TextDescription>
+</a>
+<a href="https://www.blingyte.com/privacy-policy" style={{color: "var(--primary)"}}>
 <s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Terms Of Service</s.TextDescription>
+</a>
+<a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
 <s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Traits & Rarities</s.TextDescription>
-<StyledIcon style={{marginLeft: 500}} alt={"linkedin"} src={"/config/images/linkedin@2x.svg"} />
-<StyledIcon alt={"linkedin"} src={"/config/images/twitter@2x.svg"} />
-<StyledIcon alt={"linkedin"} src={"/config/images/twitter@2x.svg"} />
-<StyledIcon alt={"linkedin"} src={"/config/images/linkedin@2x.svg"} />
+</a>
+<a href="https://www.linkedin.com/company/blingy/" style={{color: "var(--primary)"}}>
+<StyledIcon style={{marginLeft: 500}} alt={"linkedin"} src={"/config/images/linkedin.png"} />
+</a>
+<a href="https://twitter.com/ReautyDao" style={{color: "var(--primary)"}}>
+<StyledIcon alt={"linkedin"} src={"/config/images/twitter.png"} />
+</a>
+<a href="https://www.instagram.com/reautyapp/" style={{color: "var(--primary)"}}>
+<StyledIcon alt={"linkedin"} src={"/config/images/igig.png"} />
+</a>
+<a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
+<StyledIcon alt={"linkedin"} src={"/config/images/discord.png"} />
+</a>
 </s.Container>
       </s.Container>
    </s.Screen>
