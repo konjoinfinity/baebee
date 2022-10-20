@@ -4,22 +4,13 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
-
-const handleDragStart = (e) => e.preventDefault();
-
-const items = [
-  <img src="https://i.seadn.io/gae/_v-_d-QcL3fB2j96ZxUopcsHwr5WljtdzqIBRp42HRqlq-66d0Fp71aUfKPvhrzX6AoCRP6rc_rIEwqWsoZeRr-uqrWRm6zqP7PdonE?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/8PihCqhVPNZgyaspteya0tg5if_UzfiFSmjI7JwE9Jru9Ui6bdKmE2baYPUWAC2Xy6TlDwkOe1fkTLMCMRQerLPUBATiCVbxUwvpYQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/9aC-6UflX7UFEg9unOIerPstObzSDmoppXg2V6phHsi78KkrGDdioZ_im2-7SD9rqrXrGi5PpfItyRvHUKN7VTS6VJIkMhMOSfPLBhE?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/kZ6lOfyMfWLeV6XF4DaQ5IDot0b1i6brMq6SyoMUmiSWt3a1eNLhdIq8tl1FjF3tvzgOxVbhRT998RvvFijZyUFLAMPyrxQxxHbcSQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/kelXuNv6UZxFH89glmV2VfV4B0lKHkf-hugpXKGVIWjB1SCfTGmQQRwbPo76jNg7HTmLah0VzsYNUFEdshdzjKDZRlxLiQH_ewSXLQ?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/lQbYb1NyP7LtpkSSQLVln5PKaiAOoNhzfflnu-7cPUMC5hIGSrVgImGkc4Ca5DzZe3lFc4KfeWVUyAkAu5urZvaKN5JILDOYGTAeNw?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/05vPImS1AbUoJlERfli5dZP1xNPJM8qf_LZdZbLKh1641WanVeTefRFH7qGh0N6Yc5RokFT0LrgU7fy0znVcjlqDupJuG_GSOAgL8gY?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-  <img src="https://i.seadn.io/gae/Og52e2NyyPZKSzpeJMAe7sBIDAoVivIckP_bmEpb-velWeczKl0AethDYIsKEbkwu_6KQG38yWsYgqziwYDbojQcpTYosWqq6dDJWtg?auto=format&w=1000" onDragStart={handleDragStart} role="presentation" />,
-];
+import Link from '@mui/material/Link';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 let txreceipt = "";
 
@@ -37,10 +28,15 @@ export const StyledButton = styled.button`
   box-shadow: 0px 10px 0px -2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 6px 0px -2px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1%;
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+  }
+  @media (max-width: 1100px) {
+    width: 300px;
+    font-size: 24px;
   }
 `;
 
@@ -72,6 +68,37 @@ export const StyledRoundButton = styled.button`
 export const ResponsiveWrapper = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  @media (max-width: 1100px) {
+    flex-direction: column;
+  }
+`;
+
+export const Contain = styled.div`
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+`;
+
+export const ResponsiveLow = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  @media (min-width: 1100px) {
+    flex-direction: row;
+  }
+`;
+
+export const TopText = styled.div`
+  display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: stretched;
   align-items: stretched;
@@ -94,16 +121,18 @@ export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
   background-color: var(--accent);
   border-radius: 20%;
-  width: 500px;
-  margin-right: 250px;
-  margin-bottom: 200px;
+  width: 450px;
+  @media (max-width: 767px) {
+    width: 300px;
+    margin: 10%;
+  }
 `;
 
 export const StyledBanner = styled.img`
-  height: 900px;
-  margin-right: 200px;
-  margin-left: 200px;
-  margin-top: 30px;
+  width: 40em;
+  @media (max-width: 1100px) {
+    width: 22em;
+  }
 `;
 
 export const StyledIcon = styled.img`
@@ -119,7 +148,7 @@ export const StyledSpec = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.3);
   background-color: #FCB1A3;
   border-radius: 20%;
-  width: 75px;
+  width: 4em;
   padding: 10px;
   margin: 5px;
 `;
@@ -137,6 +166,17 @@ export const StyledLink = styled.a`
   color: var(--secondary);
   text-decoration: none;
 `;
+
+export const Footer = styled.div`
+  width: 100%;
+  padding: 3%;
+  background-color: #FCB1A3;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -229,7 +269,6 @@ function App() {
     });
     const config = await configResponse.json();
     SET_CONFIG(config);
-    // await provider.enable();
   };
 
   useEffect(() => {
@@ -246,40 +285,26 @@ function App() {
         flex={1}
         ai={"center"}
         style={{ background: "linear-gradient(#FFAB9C, #FEF7E9)" }}>
-          <s.Container
-      flex={1}
-            style={{
-              padding: 30,
-              backgroundColor: "#F9CFCB",
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}>
+          <s.Container flex={1} style={{display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                padding: 10,
+                boxShadow: "0px 5px 11px 2px rgba(0, 0, 0, 0.2)",
+                backgroundColor: "#F9CFCB",}}>
               <a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
-              <s.Container style={{marginRight: "8%"}}>
+              <s.Container>
               <StyledHead alt={"linkedin"} src={"/config/images/reauty-new-logo-web3-04-1@2x.png"} />
               </s.Container>
               </a>
               </s.Container>
               <s.SpacerLarge />
-              <s.SpacerLarge />
-              <s.SpacerLarge />
-              <s.SpacerLarge />
-        <s.SpacerSmall />
-        <s.TextTitle
-              style={{
-                textAlign: "center",
-                fontSize: 50,
-                fontWeight: "bold",
-                color: "var(--primary-text)"
-              }}
-            >
+        <s.TextTitle style={{fontSize: "2.5em"}}>
               TOXIC BAEBEE NFTS
             </s.TextTitle>
             <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 30,
+                fontSize: "2em",
                 fontWeight: "bold",
                 color: "#01CAFF"
               }}
@@ -287,39 +312,34 @@ function App() {
               ________
             </s.TextTitle>
             <s.SpacerSmall />
-        <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-          <s.SpacerLarge />
-          <s.Container
-            flex={2}
-            jc={"center"}
-            ai={"center"}
-            style={{
-              paddingTop: 30,
-              paddingBottom: 30,
-              paddingLeft: 300,
-              paddingRight: 300,
-              borderRadius: 24,
-            }}
-          >
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "26px" }}
-                >
-                  The Beauty Industry Lacks Transparency And Regulation. Beauty Consumers Are Frustrated With Misleading Information And Exaggerated Marketing Claims.
-                </s.TextTitle>
-            <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "26px" }}
-                >
-This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Many Customers To Obtain Unnecessary Plastic Surgery, Unhealthy Eating Habits, And Unknowingly Use Beauty Products With Toxic Ingredients.
-                </s.TextTitle>
-            <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "26px" }}
-                >
-              The "Toxic Baebee" NFT Series Was Designed To Generate Public Awareness By Illustrating The "Toxic Side Of Beauty".
-                </s.TextTitle>
-            <s.SpacerMedium />
-            {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+        <ResponsiveWrapper flex={1} style={{ display: "flex",
+              flexWrap: "wrap",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center", justifySelf: "center"}}>
+
+        <Card sx={{ maxWidth: 500, maxHeight: "50%", padding: "2%", backgroundColor: "#FEF7E9" }}>
+      <CardContent>
+        <Typography gutterBottom variant="p" component="div">
+        The Beauty Industry Lacks Transparency And Regulation. Beauty Consumers Are Frustrated With Misleading Information And Exaggerated Marketing Claims.   
+        </Typography>
+        <s.SpacerXSmall />
+        <Typography gutterBottom variant="p" component="div">
+        This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Many Customers To Obtain Unnecessary Plastic Surgery, Unhealthy Eating Habits, And Unknowingly Use Beauty Products With Toxic Ingredients.
+        </Typography>
+        <s.SpacerXSmall />
+        <Typography gutterBottom variant="p" component="div">
+        The "Toxic Baebee" NFT Series Was Designed To Generate Public Awareness By Illustrating The "Toxic Side Of Beauty".  
+        </Typography>
+      </CardContent>
+      <CardActions>
+      <s.Container flex={1} style={{ display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center"}}>
+      {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
@@ -338,12 +358,6 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
               </>
             ) : (
               <>
-                {/* <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}.
-                </s.TextTitle> */}
                 <s.SpacerXSmall />
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
@@ -437,8 +451,9 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
                 )}
               </>
             )}
-            <s.SpacerMedium />
-          </s.Container>
+           </s.Container>
+      </CardActions>
+    </Card>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg
@@ -453,7 +468,7 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
         <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 50,
+                fontSize: "3em",
                 fontWeight: "bold",
                 color: "var(--primary-text)"
               }}
@@ -462,8 +477,13 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
             </s.TextTitle>
             <s.SpacerMedium />
             <s.SpacerMedium />
-        <ResponsiveWrapper flex={1}>
-        <s.Container flex={1}>
+        <ResponsiveLow flex={1}>
+        <s.Container flex={1} style={{padding: "1%", display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center"}}>
             <StyledBanner
               alt={"example"}
               src={"/config/images/toxbbs.png"}
@@ -472,65 +492,70 @@ This Deceptive Industry Which Idolizes The "Skinny And Beauty Culture," Leads Ma
           <s.Container
             flex={2}
             style={{
-              paddingTop: 30,
-              paddingBottom: 30,
-              paddingRight: 300,
+              padding: 20,
               borderRadius: 24,
-            }}
-          >
-            <s.Container flex={1}>
-            <StyledSpec alt={"linkedin"} src={"/config/images/profile@2x.svg"} />
-            <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "30px" }}
-                >The Characters</s.TextTitle>
-                <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)" }}
-                >
+            }}>
+
+<s.Container flex={1} style={{padding: "1%", display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center"}}>
+<Card sx={{ maxWidth: 375, margin: "2%", padding: "4%", backgroundColor: "#FEF7E9" }}>
+      <CardMedia> 
+      <StyledSpec alt={"linkedin"} src={"/config/images/profile@2x.svg"} />
+      </CardMedia>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+        The Characters
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
 Each Unique Baebee Is Created By A Program That Generates Over 170 Possible Traits These Include But Are Not Limited To Expression, Headwear And Clothing. Tha Majority Of Baebees Are 2d And 10 Are 3d.
-                </s.TextTitle>
-                </s.Container>
-            <s.SpacerMedium />
-            <s.Container flex={1}>
-            <StyledSpec alt={"linkedin"} src={"/config/images/polygon.png"} />
-            <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "30px" }}
-                >ERC-721</s.TextTitle>
-                <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)" }}
-                >
-The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is Compatible With Any Service Or Exchange, And Purchasing Baebee Costs 25 MATIC - POLYGON.
-                </s.TextTitle>
-                </s.Container>
-            <s.SpacerMedium />
-            <s.Container flex={1}>
-            <StyledSpec alt={"linkedin"} src={"/config/images/utility.png"} />
-            <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)", fontSize: "30px" }}
-                >Specialty</s.TextTitle>
-                <s.SpacerMedium />
-            <s.TextTitle
-                  style={{ textAlign: "left", color: "var(--primary-text)" }}
-                >
-              Baebees NFTs are Convertable To Reautycoin (ERC 2.0 Token). We Allow Our NFT Owner To Convert Their NFT To Our Reautycoin, Please Check The Reautycoin Page To Learn More.
-                </s.TextTitle>
-                </s.Container>
+        </Typography>
+      </CardContent>
+    </Card>
+
+    <Card sx={{ maxWidth: 375, margin: "2%", padding: "4.5%", backgroundColor: "#FEF7E9" }}>
+      <CardMedia> 
+      <StyledSpec alt={"linkedin"} src={"/config/images/polygon.png"} />
+      </CardMedia>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+        ERC-721
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+        The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is Compatible With Any Service Or Exchange, And Purchasing Baebee Costs 25 MATIC - POLYGON.
+ </Typography>
+      </CardContent>
+    </Card>
+
+    <Card sx={{ maxWidth: 375, margin: "2%", padding: "4%", backgroundColor: "#FEF7E9" }}>
+      <CardMedia> 
+      <StyledSpec alt={"linkedin"} src={"/config/images/utility.png"} />
+      </CardMedia>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+        Specialty
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+        Baebees NFTs are Convertable To Reautycoin (ERC 2.0 Token). We Allow Our NFT Owner To Convert Their NFT To Our Reautycoin, Please Check The Reautycoin Page To Learn More.
+                </Typography>
+      </CardContent>
+    </Card>
+    </s.Container>
             <s.SpacerMedium />
             <s.SpacerMedium />
           </s.Container>
           <s.SpacerLarge />
-        </ResponsiveWrapper>
+        </ResponsiveLow>
         <s.SpacerLarge />
         <s.SpacerLarge />
         <s.SpacerLarge />
         <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 50,
+                fontSize: "3em",
                 fontWeight: "bold",
                 color: "var(--primary-text)"
               }}
@@ -539,37 +564,215 @@ The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is C
             </s.TextTitle>
             <s.SpacerLarge />
             <s.SpacerLarge />
-            <AliceCarousel autoWidth={true} paddingLeft={350} disableButtonsControls={true} disableDotsControls={true} mouseTracking items={items} infinite={true} />
-            <s.SpacerLarge />
-            <s.SpacerLarge />
-            <s.SpacerLarge />
-            <s.SpacerLarge />
-            <s.SpacerLarge />
-            <s.SpacerLarge />
-            <s.SpacerLarge />
-      <s.Container
-      flex={1}
-            jc={"center"}
-            ai={"center"}
-            style={{
-              padding: 30,
-              backgroundColor: "#FCB1A3",
-              display: "flex",
+      
+            <s.Container flex={1} style={{padding: "1%", display: "flex",
               flexDirection: "row",
-              flexWrap: "wrap"
-            }}>
-<s.TextTitle style={{ textAlign: "left", color: "var(--primary)", fontSize: "30px", marginRight: 500 }}>© Copyright ReautyDAO 2022</s.TextTitle>
+              flexWrap: "wrap",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center"}}>
+            <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/_v-_d-QcL3fB2j96ZxUopcsHwr5WljtdzqIBRp42HRqlq-66d0Fp71aUfKPvhrzX6AoCRP6rc_rIEwqWsoZeRr-uqrWRm6zqP7PdonE?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #1
+        </Typography>
+      </CardContent>
+      <CardActions>
+      <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/8PihCqhVPNZgyaspteya0tg5if_UzfiFSmjI7JwE9Jru9Ui6bdKmE2baYPUWAC2Xy6TlDwkOe1fkTLMCMRQerLPUBATiCVbxUwvpYQ?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #2
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/_v-_d-QcL3fB2j96ZxUopcsHwr5WljtdzqIBRp42HRqlq-66d0Fp71aUfKPvhrzX6AoCRP6rc_rIEwqWsoZeRr-uqrWRm6zqP7PdonE?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #3
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/9aC-6UflX7UFEg9unOIerPstObzSDmoppXg2V6phHsi78KkrGDdioZ_im2-7SD9rqrXrGi5PpfItyRvHUKN7VTS6VJIkMhMOSfPLBhE?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #4
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/kZ6lOfyMfWLeV6XF4DaQ5IDot0b1i6brMq6SyoMUmiSWt3a1eNLhdIq8tl1FjF3tvzgOxVbhRT998RvvFijZyUFLAMPyrxQxxHbcSQ?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #5
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #6
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/kelXuNv6UZxFH89glmV2VfV4B0lKHkf-hugpXKGVIWjB1SCfTGmQQRwbPo76jNg7HTmLah0VzsYNUFEdshdzjKDZRlxLiQH_ewSXLQ?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #7
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/lQbYb1NyP7LtpkSSQLVln5PKaiAOoNhzfflnu-7cPUMC5hIGSrVgImGkc4Ca5DzZe3lFc4KfeWVUyAkAu5urZvaKN5JILDOYGTAeNw?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #8
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/05vPImS1AbUoJlERfli5dZP1xNPJM8qf_LZdZbLKh1641WanVeTefRFH7qGh0N6Yc5RokFT0LrgU7fy0znVcjlqDupJuG_GSOAgL8gY?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #9
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    <Card sx={{ maxWidth: 360, margin: "1%" }}>
+      <CardMedia
+        component="img"
+        height="260"
+        image="https://i.seadn.io/gae/Og52e2NyyPZKSzpeJMAe7sBIDAoVivIckP_bmEpb-velWeczKl0AethDYIsKEbkwu_6KQG38yWsYgqziwYDbojQcpTYosWqq6dDJWtg?auto=format&w=1000"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Toxic Baebee #10
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+        <Button size="small">View Collection</Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    </s.Container>
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+            <s.SpacerLarge />
+      <Footer flex={1}>
+<s.TextTitle style={{ textAlign: "left", color: "var(--primary)", fontSize: "20px", marginRight: "18%"}}>© Copyright ReautyDAO 2022</s.TextTitle>
+
 <a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
-<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Document</s.TextDescription>
+<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", marginRight: "15px"}}> Document</s.TextDescription>
 </a>
 <a href="https://www.blingyte.com/privacy-policy" style={{color: "var(--primary)"}}>
-<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Terms Of Service</s.TextDescription>
+<s.TextDescription style={{ textAlign: "center", color: "var(--primary)" , marginRight: "15px"}}> Terms Of Service</s.TextDescription>
 </a>
 <a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
-<s.TextDescription style={{ textAlign: "center", color: "var(--primary)", padding: 10 }}> Traits & Rarities</s.TextDescription>
+<s.TextDescription style={{ textAlign: "center", color: "var(--primary)"}}> Traits & Rarities</s.TextDescription>
 </a>
-<a href="https://www.linkedin.com/company/blingy/" style={{color: "var(--primary)"}}>
-<StyledIcon style={{marginLeft: 500}} alt={"linkedin"} src={"/config/images/linkedin.png"} />
+<a href="https://www.linkedin.com/company/blingy/" style={{color: "var(--primary)", marginLeft: "18%"}}>
+<StyledIcon alt={"linkedin"} src={"/config/images/linkedin.png"} />
 </a>
 <a href="https://twitter.com/ReautyDao" style={{color: "var(--primary)"}}>
 <StyledIcon alt={"linkedin"} src={"/config/images/twitter.png"} />
@@ -580,11 +783,10 @@ The Baebees NFT Contract That Governs Ownership Is A Standard ERC-721 Which Is C
 <a href="https://reautydao.io/" style={{color: "var(--primary)"}}>
 <StyledIcon alt={"linkedin"} src={"/config/images/discord.png"} />
 </a>
-</s.Container>
+          </Footer>
       </s.Container>
    </s.Screen>
   );
 }
 
 export default App;
-
