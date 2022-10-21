@@ -1,0 +1,20 @@
+{
+    "CONTRACT_ADDRESS": "0x527F243B04fcaDaA6f6244F65d451bDeA8cBFa92",
+    "SCAN_LINK": "https://polygonscan.com/address/0x527f243b04fcadaa6f6244f65d451bdea8cbfa92",
+    "NETWORK": {
+      "NAME": "Polygon",
+      "SYMBOL": "Matic",
+      "ID": 137
+    },
+    "NFT_NAME": "Toxic Baebee Pixelated",
+    "SYMBOL": "TOXBAEBEEPIX",
+    "MAX_SUPPLY": 1000,
+    "WEI_COST": 50000000000000000000,
+    "DISPLAY_COST": 50,
+    "GAS_LIMIT": 8000000,
+    "MARKETPLACE": "Opeansea",
+    "MARKETPLACE_LINK": "https://opensea.io/collection/toxic-baebee-pixelated",
+    "SHOW_BACKGROUND": true
+  }
+  
+  
