@@ -511,7 +511,7 @@ function App() {
         The Characters
         </Typography>
         <Typography variant="body2" color="text.secondary">
-Each Unique Baebee Is Created By A Program That Generates Over 170 Possible Traits These Include But Are Not Limited To Expression, Headwear And Clothing. Tha Majority Of Baebees Are 2d And 10 Are 3d.
+Each Unique Baebee Is Created By A Program That Generates Over 170 Possible Traits These Include But Are Not Limited To Expression, Headwear And Clothing. The Majority Of Baebees Are 2d And 10 Are 3d.
         </Typography>
       </CardContent>
     </Card>
