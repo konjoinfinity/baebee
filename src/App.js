@@ -320,7 +320,7 @@ function App() {
           </a>
         </s.Container>
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "3em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em" }}>
           TOXIC BAEBEE NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -528,7 +528,7 @@ function App() {
 
 
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "3em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em" }}>
           TOXIC BAEBEE PIXELATED NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -735,7 +735,7 @@ function App() {
         <s.SpacerLarge />
 
         <s.SpacerMedium />
-        <s.TextTitle style={{ fontSize: "3em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em" }}>
           SPECIFICATIONS
         </s.TextTitle>
         <s.SpacerMedium />
@@ -861,8 +861,8 @@ function App() {
         <s.SpacerLarge />
         <s.SpacerLarge />
         <s.SpacerMedium />
-        <s.TextTitle style={{ fontSize: "3em" }}>
-          THE CHARACTERS
+        <s.TextTitle style={{ fontSize: "2.5em" }}>
+          CHARACTERS
         </s.TextTitle>
         <s.SpacerMedium />
         <s.SpacerMedium />
@@ -1028,7 +1028,7 @@ function App() {
             </s.Container>
            </ResponsiveLow>
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "3em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em" }}>
           RECENT MINTS
         </s.TextTitle>
         <s.SpacerLarge />
