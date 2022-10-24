@@ -157,7 +157,7 @@ export const StyledHead = styled.img`
   box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.1);
   background-color: var(--accent);
   border-radius: 20%;
-  width: 100px;
+  width: 5em;
   padding: 15px;
   margin: 5px;
 `;
@@ -181,6 +181,8 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNFT, setClaimingNFT] = useState(false);
+  const [show2Dmint, setShow2Dmint] = useState(false)
+  const [showPixelmint, setShowPixelmint] = useState(false)
   const [feedback, setFeedback] = useState(
     `Click to mint your Toxic Baebee NFT`
   );
@@ -207,8 +209,10 @@ function App() {
   const claimNFTs = (a) => {
     let cost = 0;
     if (a == true){
+        setShowPixelmint(true)
         cost = 50000000000000000000
     } else {
+      setShow2Dmint(true)
       cost = CONFIG.WEI_COST;
     }
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -265,6 +269,10 @@ function App() {
     }
   };
 
+  const showHide = (a) => {
+    a ? setShowPixelmint(true) : setShow2Dmint(true)
+  };
+
   const getConfig = async () => {
     const configResponse = await fetch("/config/config.json", {
       headers: {
@@ -297,7 +305,7 @@ function App() {
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            padding: 10,
+            padding: 5,
             boxShadow: "0px 5px 11px 2px rgba(0, 0, 0, 0.2)",
             backgroundColor: "#F9CFCB",
           }}
@@ -312,7 +320,7 @@ function App() {
           </a>
         </s.Container>
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.TextTitle style={{ fontSize: "3em" }}>
           TOXIC BAEBEE NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -415,6 +423,7 @@ function App() {
                             e.preventDefault();
                             dispatch(connect());
                             getData();
+                            showHide(false);
                           }}
                         >
                           Connect Your Wallet
@@ -489,6 +498,7 @@ function App() {
                         </s.Container>
                         <s.SpacerSmall />
                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                          {show2Dmint ? 
                           <StyledButton
                             disabled={claimingNFT ? 1 : 0}
                             onClick={(e) => {
@@ -499,6 +509,7 @@ function App() {
                           >
                             {claimingNFT ? "MINTING..." : "MINT - 25 MATIC"}
                           </StyledButton>
+                           : ""}
                         </s.Container>
                       </>
                     )}
@@ -517,7 +528,7 @@ function App() {
 
 
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.TextTitle style={{ fontSize: "3em" }}>
           TOXIC BAEBEE PIXELATED NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -620,6 +631,7 @@ function App() {
                             e.preventDefault();
                             dispatch(pixelconnect());
                             getData();
+                            showHide(true);
                           }}
                         >
                           Connect Your Wallet
@@ -694,6 +706,7 @@ function App() {
                         </s.Container>
                         <s.SpacerSmall />
                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                          {showPixelmint ?
                           <StyledButton
                             disabled={claimingNFT ? 1 : 0}
                             onClick={(e) => {
@@ -704,6 +717,7 @@ function App() {
                           >
                             {claimingNFT ? "MINTING..." : "MINT - 50 MATIC"}
                           </StyledButton>
+                          : ""}
                         </s.Container>
                       </>
                     )}
@@ -721,14 +735,7 @@ function App() {
         <s.SpacerLarge />
 
         <s.SpacerMedium />
-        <s.TextTitle
-          style={{
-            textAlign: "center",
-            fontSize: "3em",
-            fontWeight: "bold",
-            color: "var(--primary-text)",
-          }}
-        >
+        <s.TextTitle style={{ fontSize: "3em" }}>
           SPECIFICATIONS
         </s.TextTitle>
         <s.SpacerMedium />
@@ -853,20 +860,179 @@ function App() {
         </ResponsiveLow>
         <s.SpacerLarge />
         <s.SpacerLarge />
+        <s.SpacerMedium />
+        <s.TextTitle style={{ fontSize: "3em" }}>
+          THE CHARACTERS
+        </s.TextTitle>
+        <s.SpacerMedium />
+        <s.SpacerMedium />
+        <ResponsiveLow flex={1}>
+          <s.Container
+            flex={2}
+            style={{
+              padding: 20,
+              borderRadius: 24,
+            }}
+          >
+            <s.Container
+              flex={1}
+              style={{
+                padding: "1%",
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignContent: "center",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "33em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/Unreal.png"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Unreal Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  At a time when the Internet unifies aesthetic standards, more and more people are undergoing plastic surgery, which is not only harmful to health but also a wrong value orientation. People should recognize their original appearance and natural charm.
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "33em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/Vampire.png"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Contaminated Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  Harmful cosmetic ingredients and non-degradable packaging threaten the planet's environment and contribute to global warming.
+                   </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "33em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/Zombie.png"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Poisoned Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  Harmful ingredients in cosmetics are invading our health, and their advertising slogans are corroding our minds.
+                   </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "33em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/Frida1.png"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Mask Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  Today's global society is gradually losing diversity; everyone wears a mask and becomes what the mainstream likes the mainstream demands, and behind this is the destruction of individuality.
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "33em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/Clown.png"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Joker Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                 Exaggerated advertisements and deformed aesthetics have created real-life clowns; the pain of plastic surgery failure and the poisoning of harmful cosmetics have turned the victim into another joker.
+                   </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "33em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/Fire.png"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Fire Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  The fake beauty information, misleading advertisement, trials, and errors burn a lot of energy from us; we can not get what we want exactly, and the anger fire is coming up.
+                  </Typography>
+                </CardContent>
+              </Card>
+            </s.Container>
+            </s.Container>
+           </ResponsiveLow>
         <s.SpacerLarge />
-        <s.TextTitle
-          style={{
-            textAlign: "center",
-            fontSize: "3em",
-            fontWeight: "bold",
-            color: "var(--primary-text)",
-          }}
-        >
+        <s.TextTitle style={{ fontSize: "3em" }}>
           RECENT MINTS
         </s.TextTitle>
         <s.SpacerLarge />
         <s.SpacerLarge />
-
         <s.Container
           flex={1}
           style={{
@@ -919,7 +1085,7 @@ function App() {
             <CardMedia
               component="img"
               height="260"
-              image="https://i.seadn.io/gae/_v-_d-QcL3fB2j96ZxUopcsHwr5WljtdzqIBRp42HRqlq-66d0Fp71aUfKPvhrzX6AoCRP6rc_rIEwqWsoZeRr-uqrWRm6zqP7PdonE?auto=format&w=1000"
+              image="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
