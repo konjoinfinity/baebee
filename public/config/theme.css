@@ -6,3 +6,7 @@
   --accent: #fefcf3;
   --accent-text: #f59381;
 }
+
+html {
+  scroll-behavior: smooth;
+}

@@ -320,7 +320,7 @@ function App() {
           </a>
         </s.Container>
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em" }} id="mint">
           TOXIC BAEBEE NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -780,6 +780,7 @@ function App() {
                   margin: "2%",
                   padding: "4%",
                   backgroundColor: "#FEF7E9",
+                  height: 425
                 }}
               >
                 <CardMedia>
@@ -795,10 +796,15 @@ function App() {
                   <Typography variant="body2" color="text.secondary">
                     Each Unique Baebee Is Created By A Program That Generates
                     Over 170 Possible Traits These Include But Are Not Limited
-                    To Expression, Headwear And Clothing. The Majority Of
-                    Baebees Are 2d And 10 Are 3d.
+                    To Expression, Headwear And Clothing. 4000 Toxic
+                    Baebees Are 2D, 1000 Are Pixelated, And 7 Are 3D.
                   </Typography>
                 </CardContent>
+                <CardActions>
+                <Link href="#char">
+              <StyledButton style={{fontSize: 20, width: "auto"}}>See The Characters</StyledButton>
+              </Link>
+            </CardActions>
               </Card>
 
               <Card
@@ -807,6 +813,7 @@ function App() {
                   margin: "2%",
                   padding: "4.5%",
                   backgroundColor: "#FEF7E9",
+                  height: 425
                 }}
               >
                 <CardMedia>
@@ -822,9 +829,14 @@ function App() {
                   <Typography variant="body2" color="text.secondary">
                     The Baebees NFT Contract That Governs Ownership Is A
                     Standard ERC-721 Which Is Compatible With Any Service Or
-                    Exchange, And Purchasing Baebee Costs 25 MATIC - POLYGON.
+                    Exchange, And Purchasing Baebee Costs 25/50 MATIC - POLYGON And 3D Costs 0.2 ETH.
                   </Typography>
                 </CardContent>
+                <CardActions>
+                <Link href="#mint">
+              <StyledButton style={{fontSize: 20, width: "auto"}}>Mint an NFT</StyledButton>
+              </Link>
+            </CardActions>
               </Card>
 
               <Card
@@ -833,6 +845,7 @@ function App() {
                   margin: "2%",
                   padding: "4%",
                   backgroundColor: "#FEF7E9",
+                  height: 425
                 }}
               >
                 <CardMedia>
@@ -851,6 +864,11 @@ function App() {
                     Reautycoin, Please Check The Reautycoin Page To Learn More.
                   </Typography>
                 </CardContent>
+                <CardActions>
+                <Link href="https://reautydao.io">
+              <StyledButton style={{fontSize: 20, width: "auto"}}>Learn More</StyledButton>
+              </Link>
+            </CardActions>
               </Card>
             </s.Container>
             <s.SpacerMedium />
@@ -861,7 +879,7 @@ function App() {
         <s.SpacerLarge />
         <s.SpacerLarge />
         <s.SpacerMedium />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em" }} id="char">
           CHARACTERS
         </s.TextTitle>
         <s.SpacerMedium />
@@ -1027,6 +1045,130 @@ function App() {
             </s.Container>
             </s.Container>
            </ResponsiveLow>
+
+           <s.TextTitle style={{ fontSize: "2.5em" }}>
+          3D TOXIC BAEBEES
+        </s.TextTitle>
+        <s.SpacerMedium />
+        <s.SpacerMedium />
+        <ResponsiveLow flex={1}>
+          <s.Container
+            flex={2}
+            style={{
+              padding: 20,
+              borderRadius: 24,
+            }}
+          >
+            <s.Container
+              flex={1}
+              style={{
+                padding: "1%",
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignContent: "center",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "50em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/3d.gif"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Reauty DAO
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  We're so proud to introduce Reauty DAO to the world!
+                  <br/><br/>
+Reauty DAO community empowers all members with ownership, control, and monetization of their beauty-relevant data. Overall, community members have the power to build a new order in the beauty industry with transparency, inclusiveness, and authenticity supported by blockchain technology!
+<br/><br/>
+Creating a truly decentralized and trustworthy beauty community is vital for every beauty stakeholder worldwide, and we're excited to lead this disruptive beauty transformation. 
+</Typography>
+                </CardContent>
+                <CardActions>
+              <Link href="https://reautydao.io">
+              <StyledButton style={{fontSize: 20, width: "auto"}}>Learn More</StyledButton>
+              </Link>
+            </CardActions>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "50em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/3d1.gif"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  Why NFTs?
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                  <br /><br />
+The beauty industry needs to do better. We see firsthand how misleading marketing claims, exaggerated claims, and unrealistic expectations lead to unhealthy choices for our customers. That's why we're launching the first NFT series: Toxic Baebaee! Each variation is entirely customizable with 3D, Pixelated, and 2D so you can choose the best look. This NFT series will help raise awareness of the toxic beauty industry while empowering consumers to make healthier choices. 
+<br /><br /><br /><br />
+ </Typography>
+                </CardContent>
+                <CardActions>
+                <Link href="#mint">
+              <StyledButton style={{fontSize: 20, width: "auto"}}>Mint Now</StyledButton>
+              </Link>
+            </CardActions>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "50em"
+                }}
+              >
+                <CardMedia
+              component="img"
+              height="260"
+              image="/config/images/3d3.gif"
+            />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                  NFT Purchase = DAO Membership
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <br /><br />
+                  It's Halloween season, and we're celebrating by slashing prices on Toxic Baebee NFTs from midnight on 31st Oct 2022 until 30th Nov 2022! <br/><br/>
+The first 100 Toxic Baebee NFT owners will get 0.1 ETH worth of Reauty DAO membership, giving them access to all the community privileges and powers to improve the web3 beauty community. Don't miss out on this spooky deal!
+<br /><br /><br />
+             </Typography>
+                </CardContent>
+                <CardActions>
+              <Link href="https://opensea.io/collection/3d-toxic-baebee">
+              <StyledButton style={{fontSize: 20, width: "auto"}}>Purchase on Opensea</StyledButton>
+              </Link>
+            </CardActions>
+              </Card>
+            </s.Container>
+            </s.Container>
+           </ResponsiveLow>
+
+
         <s.SpacerLarge />
         <s.TextTitle style={{ fontSize: "2.5em" }}>
           RECENT MINTS
@@ -1045,7 +1187,7 @@ function App() {
             justifyContent: "center",
           }}
         >
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
             <CardMedia
               component="img"
               height="260"
@@ -1063,11 +1205,29 @@ function App() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
             <CardMedia
               component="img"
               height="260"
               image="https://i.seadn.io/gae/Yst4YG30_k7JxMUJ0E8g9jvdfEHz19Sxioye0L59VxifdtbWRiipnv062qwaRvlL9_C2fKxA8VmfjtjJ8VIb627wmmHQdr_rBh28dw?auto=format&w=1000"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+              Pixelated Toxic Baebee #1
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link href="https://opensea.io/collection/toxic-baebee-pixelated">
+                <Button size="small">View Collection</Button>
+              </Link>
+            </CardActions>
+          </Card>
+
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
+            <CardMedia
+              component="img"
+              height="260"
+              image="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -1081,11 +1241,29 @@ function App() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
             <CardMedia
               component="img"
               height="260"
-              image="https://i.seadn.io/gae/tWeVD95U92BTHewJVhuJKEKGlPqhPnYreD4sPgRSyqtvLe8Al4WqNQxVVnF-LK3i24DrGg5fhBDsYXlUtV_Oww6t3kVz25bfFuvB?auto=format&w=1000"
+              image="https://i.seadn.io/gae/aPg03dyRekQ37GGxOSUXZMtv4KgTTdP3Gu2Z6WjtjDRbLgtq-RAgU3zJu9QAQeNlLHMoec2gKQqdz7AtosLDSDp3zUVGsLZa7ZPscg?auto=format&w=1000"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+              Pixelated Toxic Baebee #2
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link href="https://opensea.io/collection/toxic-baebee-pixelated">
+                <Button size="small">View Collection</Button>
+              </Link>
+            </CardActions>
+          </Card>
+
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
+            <CardMedia
+              component="img"
+              height="260"
+              image="https://i.seadn.io/gae/kZ6lOfyMfWLeV6XF4DaQ5IDot0b1i6brMq6SyoMUmiSWt3a1eNLhdIq8tl1FjF3tvzgOxVbhRT998RvvFijZyUFLAMPyrxQxxHbcSQ?auto=format&w=1000"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -1099,11 +1277,29 @@ function App() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
             <CardMedia
               component="img"
               height="260"
-              image="https://i.seadn.io/gae/aPg03dyRekQ37GGxOSUXZMtv4KgTTdP3Gu2Z6WjtjDRbLgtq-RAgU3zJu9QAQeNlLHMoec2gKQqdz7AtosLDSDp3zUVGsLZa7ZPscg?auto=format&w=1000"
+              image="https://i.seadn.io/gae/1FB7wzleeD6z_3w6mKO6AFQIdYaAlQVkU0kRlFDNSFAm3MFn2mQjgW6ciPlSVj05nLt9VbPvAiSef-ZClbWsrrbvt6QnWT6WorYm?auto=format&w=1000"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+              Pixelated Toxic Baebee #3
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link href="https://opensea.io/collection/toxic-baebee-pixelated">
+                <Button size="small">View Collection</Button>
+              </Link>
+            </CardActions>
+          </Card>
+
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
+            <CardMedia
+              component="img"
+              height="260"
+              image="https://i.seadn.io/gae/kelXuNv6UZxFH89glmV2VfV4B0lKHkf-hugpXKGVIWjB1SCfTGmQQRwbPo76jNg7HTmLah0VzsYNUFEdshdzjKDZRlxLiQH_ewSXLQ?auto=format&w=1000"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -1117,11 +1313,29 @@ function App() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
             <CardMedia
               component="img"
               height="260"
-              image="https://i.seadn.io/gae/kZ6lOfyMfWLeV6XF4DaQ5IDot0b1i6brMq6SyoMUmiSWt3a1eNLhdIq8tl1FjF3tvzgOxVbhRT998RvvFijZyUFLAMPyrxQxxHbcSQ?auto=format&w=1000"
+              image="https://i.seadn.io/gae/JMQvNe-FfHV-brDs5FFdoVSr8QvUkd-P0jRjmR_8JEDOLFHM6Cp017wyw2ESUhC4qVdMIhycp37ZNU1u2KiKDczRHS3XyExDPbqL?auto=format&w=1000"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Pixelated Toxic Baebee #4
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link href="https://opensea.io/collection/toxic-baebee-pixelated">
+                <Button size="small">View Collection</Button>
+              </Link>
+            </CardActions>
+          </Card>
+
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
+            <CardMedia
+              component="img"
+              height="260"
+              image="https://i.seadn.io/gae/05vPImS1AbUoJlERfli5dZP1xNPJM8qf_LZdZbLKh1641WanVeTefRFH7qGh0N6Yc5RokFT0LrgU7fy0znVcjlqDupJuG_GSOAgL8gY?auto=format&w=1000"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -1135,79 +1349,7 @@ function App() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
-            <CardMedia
-              component="img"
-              height="260"
-              image="https://i.seadn.io/gae/1FB7wzleeD6z_3w6mKO6AFQIdYaAlQVkU0kRlFDNSFAm3MFn2mQjgW6ciPlSVj05nLt9VbPvAiSef-ZClbWsrrbvt6QnWT6WorYm?auto=format&w=1000"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Toxic Baebee #6
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
-                <Button size="small">View Collection</Button>
-              </Link>
-            </CardActions>
-          </Card>
-
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
-            <CardMedia
-              component="img"
-              height="260"
-              image="https://i.seadn.io/gae/kelXuNv6UZxFH89glmV2VfV4B0lKHkf-hugpXKGVIWjB1SCfTGmQQRwbPo76jNg7HTmLah0VzsYNUFEdshdzjKDZRlxLiQH_ewSXLQ?auto=format&w=1000"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Toxic Baebee #7
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
-                <Button size="small">View Collection</Button>
-              </Link>
-            </CardActions>
-          </Card>
-
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
-            <CardMedia
-              component="img"
-              height="260"
-              image="https://i.seadn.io/gae/JMQvNe-FfHV-brDs5FFdoVSr8QvUkd-P0jRjmR_8JEDOLFHM6Cp017wyw2ESUhC4qVdMIhycp37ZNU1u2KiKDczRHS3XyExDPbqL?auto=format&w=1000"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Toxic Baebee #8
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
-                <Button size="small">View Collection</Button>
-              </Link>
-            </CardActions>
-          </Card>
-
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
-            <CardMedia
-              component="img"
-              height="260"
-              image="https://i.seadn.io/gae/05vPImS1AbUoJlERfli5dZP1xNPJM8qf_LZdZbLKh1641WanVeTefRFH7qGh0N6Yc5RokFT0LrgU7fy0znVcjlqDupJuG_GSOAgL8gY?auto=format&w=1000"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Toxic Baebee #9
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
-                <Button size="small">View Collection</Button>
-              </Link>
-            </CardActions>
-          </Card>
-
-          <Card sx={{ maxWidth: 360, margin: "1%" }}>
+          <Card sx={{ maxWidth: 250, margin: "1%", height: 410 }}>
             <CardMedia
               component="img"
               height="260"
@@ -1215,11 +1357,11 @@ function App() {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                Toxic Baebee #10
+                Pixelated Toxic Baebee #5
               </Typography>
             </CardContent>
             <CardActions>
-              <Link href="https://opensea.io/collection/toxic-baebee-nft-series">
+              <Link href="https://opensea.io/collection/toxic-baebee-pixelated">
                 <Button size="small">View Collection</Button>
               </Link>
             </CardActions>
