@@ -563,22 +563,11 @@ function App() {
           >
             <CardContent>
               <Typography gutterBottom variant="p" component="div">
-                The Beauty Industry Lacks Transparency And Regulation. Beauty
-                Consumers Are Frustrated With Misleading Information And
-                Exaggerated Marketing Claims.
+              Reauty DAO community empowers all members with ownership, control, and monetization of their beauty-relevant data. Overall, community members have the power to build a new order in the beauty industry with transparency, inclusiveness, and authenticity supported by blockchain technology!
+
               </Typography>
               <s.SpacerXSmall />
-              <Typography gutterBottom variant="p" component="div">
-                This Deceptive Industry Which Idolizes The "Skinny And Beauty
-                Culture," Leads Many Customers To Obtain Unnecessary Plastic
-                Surgery, Unhealthy Eating Habits, And Unknowingly Use Beauty
-                Products With Toxic Ingredients.
-              </Typography>
-              <s.SpacerXSmall />
-              <Typography gutterBottom variant="p" component="div">
-                The "Toxic Baebee" NFT Series Was Designed To Generate Public
-                Awareness By Illustrating The "Toxic Side Of Beauty".
-              </Typography>
+              
             </CardContent>
             <CardActions>
               <s.Container
@@ -1090,11 +1079,12 @@ function App() {
                   Reauty DAO
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                  We're so proud to introduce Reauty DAO to the world!
                   <br/><br/>
-Reauty DAO community empowers all members with ownership, control, and monetization of their beauty-relevant data. Overall, community members have the power to build a new order in the beauty industry with transparency, inclusiveness, and authenticity supported by blockchain technology!
+                  We're so proud to introduce Reauty DAO to the world!
+                  
 <br/><br/>
 Creating a truly decentralized and trustworthy beauty community is vital for every beauty stakeholder worldwide, and we're excited to lead this disruptive beauty transformation. 
+<br/><br/><br/><br/><br/><br/><br/><br/>
 </Typography>
                 </CardContent>
                 <CardActions>
