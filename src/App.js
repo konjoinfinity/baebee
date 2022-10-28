@@ -128,6 +128,10 @@ export const StyledImg = styled.img`
   }
 `;
 
+export const Img = styled.img`
+  width: 100%;
+`;
+
 export const StyledBanner = styled.img`
   width: 40em;
   @media (max-width: 1100px) {
@@ -181,8 +185,8 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNFT, setClaimingNFT] = useState(false);
-  const [show2Dmint, setShow2Dmint] = useState(false)
-  const [showPixelmint, setShowPixelmint] = useState(false)
+  const [show2Dmint, setShow2Dmint] = useState(false);
+  const [showPixelmint, setShowPixelmint] = useState(false);
   const [feedback, setFeedback] = useState(
     `Click to mint your Toxic Baebee NFT`
   );
@@ -209,20 +213,20 @@ function App() {
   const claimNFTs = (a) => {
     let cost = 0;
     let contractAddress = "";
-    if (a == true){
-        setShowPixelmint(true)
-        cost = 50000000000000000000
-        contractAddress = "0x527F243B04fcaDaA6f6244F65d451bDeA8cBFa92"
+    if (a == true) {
+      setShowPixelmint(true);
+      cost = 50000000000000000000;
+      contractAddress = "0x527F243B04fcaDaA6f6244F65d451bDeA8cBFa92";
     } else {
-      setShow2Dmint(true)
+      setShow2Dmint(true);
       cost = CONFIG.WEI_COST;
-      contractAddress = CONFIG.CONTRACT_ADDRESS
+      contractAddress = CONFIG.CONTRACT_ADDRESS;
     }
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log(CONFIG.CONTRACT_ADDRESS)
-    console.log(contractAddress)
+    console.log(CONFIG.CONTRACT_ADDRESS);
+    console.log(contractAddress);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
@@ -275,7 +279,7 @@ function App() {
   };
 
   const showHide = (a) => {
-    a ? setShowPixelmint(true) : setShow2Dmint(true)
+    a ? setShowPixelmint(true) : setShow2Dmint(true);
   };
 
   const getConfig = async () => {
@@ -324,8 +328,14 @@ function App() {
             </s.Container>
           </a>
         </s.Container>
+        <s.Container>
+          <Img alt={"halloween"} src={"/config/images/hw2.gif"}></Img>
+        </s.Container>
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "2.5em" }} id="mint">
+        <s.TextTitle
+          style={{ fontSize: "2.5em", textAlign: "center" }}
+          id="mint"
+        >
           TOXIC BAEBEE NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -359,22 +369,24 @@ function App() {
             }}
           >
             <CardContent>
-              <Typography gutterBottom variant="p" component="div">
-                The Beauty Industry Lacks Transparency And Regulation. Beauty
-                Consumers Are Frustrated With Misleading Information And
-                Exaggerated Marketing Claims.
-              </Typography>
-              <s.SpacerXSmall />
-              <Typography gutterBottom variant="p" component="div">
-                This Deceptive Industry Which Idolizes The "Skinny And Beauty
-                Culture," Leads Many Customers To Obtain Unnecessary Plastic
-                Surgery, Unhealthy Eating Habits, And Unknowingly Use Beauty
-                Products With Toxic Ingredients.
-              </Typography>
-              <s.SpacerXSmall />
-              <Typography gutterBottom variant="p" component="div">
-                The "Toxic Baebee" NFT Series Was Designed To Generate Public
-                Awareness By Illustrating The "Toxic Side Of Beauty".
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ fontSize: "1em" }}
+              >
+                The beauty industry lacks transparency and regulation. Beauty
+                consumers are frustrated with misleading information And
+                exaggerated marketing claims.
+                <br />
+                <br />
+                This deceptive industry which idolizes the "Skinny And Beauty
+                Culture," leads many customers to obtain unnecessary plastic
+                surgery, unhealthy eating habits, and unknowingly use beauty
+                products with toxic ingredients.
+                <br />
+                <br />
+                The "Toxic Baebee" NFT Series was designed to generate public
+                awareness by illustrating the "Toxic Side Of Beauty."
               </Typography>
             </CardContent>
             <CardActions>
@@ -503,18 +515,20 @@ function App() {
                         </s.Container>
                         <s.SpacerSmall />
                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                          {show2Dmint ? 
-                          <StyledButton
-                            disabled={claimingNFT ? 1 : 0}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              claimNFTs(false);
-                              getData();
-                            }}
-                          >
-                            {claimingNFT ? "MINTING..." : "MINT - 25 MATIC"}
-                          </StyledButton>
-                           : ""}
+                          {show2Dmint ? (
+                            <StyledButton
+                              disabled={claimingNFT ? 1 : 0}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                claimNFTs(false);
+                                getData();
+                              }}
+                            >
+                              {claimingNFT ? "MINTING..." : "MINT - 25 MATIC"}
+                            </StyledButton>
+                          ) : (
+                            ""
+                          )}
                         </s.Container>
                       </>
                     )}
@@ -531,9 +545,8 @@ function App() {
         <s.SpacerLarge />
         <s.SpacerLarge />
 
-
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em", textAlign: "center" }}>
           TOXIC BAEBEE PIXELATED NFTS
         </s.TextTitle>
         <s.TextTitle
@@ -567,12 +580,19 @@ function App() {
             }}
           >
             <CardContent>
-              <Typography gutterBottom variant="p" component="div">
-              Reauty DAO community empowers all members with ownership, control, and monetization of their beauty-relevant data. Overall, community members have the power to build a new order in the beauty industry with transparency, inclusiveness, and authenticity supported by blockchain technology!
-
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ fontSize: "1em" }}
+              >
+                We're so excited to introduce our new pixelated Toxic Baebee NFT
+                series - Limited to 1000 total NFTs, The Pixelated variation
+                better illustrates the beauty industry's lack of transparency,
+                and it's filled with misleading marketing claims, unrealistic
+                expectations, and harmful ingredients that risk our health. This
+                NFT series aims to raise awareness of "Toxic Side of Beauty."
               </Typography>
               <s.SpacerXSmall />
-              
             </CardContent>
             <CardActions>
               <s.Container
@@ -700,18 +720,20 @@ function App() {
                         </s.Container>
                         <s.SpacerSmall />
                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                          {showPixelmint ?
-                          <StyledButton
-                            disabled={claimingNFT ? 1 : 0}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              claimNFTs(true);
-                              getData();
-                            }}
-                          >
-                            {claimingNFT ? "MINTING..." : "MINT - 50 MATIC"}
-                          </StyledButton>
-                          : ""}
+                          {showPixelmint ? (
+                            <StyledButton
+                              disabled={claimingNFT ? 1 : 0}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                claimNFTs(true);
+                                getData();
+                              }}
+                            >
+                              {claimingNFT ? "MINTING..." : "MINT - 50 MATIC"}
+                            </StyledButton>
+                          ) : (
+                            ""
+                          )}
                         </s.Container>
                       </>
                     )}
@@ -727,13 +749,12 @@ function App() {
         </ResponsiveWrapper>
         <s.SpacerLarge />
         <s.SpacerLarge />
-
         <s.SpacerMedium />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.SpacerMedium />
+        <s.SpacerMedium />
+        <s.TextTitle style={{ fontSize: "2.5em", textAlign: "center" }}>
           SPECIFICATIONS
         </s.TextTitle>
-        <s.SpacerMedium />
-        <s.SpacerMedium />
         <ResponsiveLow flex={1}>
           <s.Container
             flex={1}
@@ -749,13 +770,7 @@ function App() {
           >
             <StyledBanner alt={"example"} src={"/config/images/toxbbs.png"} />
           </s.Container>
-          <s.Container
-            flex={2}
-            style={{
-              padding: 20,
-              borderRadius: 24,
-            }}
-          >
+          <s.Container flex={2}>
             <s.Container
               flex={1}
               style={{
@@ -766,6 +781,7 @@ function App() {
                 alignContent: "center",
                 alignItems: "center",
                 justifyContent: "center",
+                marginTop: "8em",
               }}
             >
               <Card
@@ -774,7 +790,7 @@ function App() {
                   margin: "2%",
                   padding: "4%",
                   backgroundColor: "#FEF7E9",
-                  height: 425
+                  height: 450,
                 }}
               >
                 <CardMedia>
@@ -788,17 +804,20 @@ function App() {
                     The Characters
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Each Unique Baebee Is Created By A Program That Generates
-                    Over 170 Possible Traits These Include But Are Not Limited
-                    To Expression, Headwear And Clothing. 4000 Toxic
-                    Baebees Are 2D, 1000 Are Pixelated, And 7 Are 3D.
+                    Each unique Baebee is designed by our creative team that
+                    generates over 170 Possible traits. These include but are
+                    not limited to expression, headwear, and clothing. We
+                    developed 4000 Toxic Baebees are 2D, 1000 Toxic Baebee are
+                    Pixelated, And 7 Limited Toxic Baebee Edition are 3D.
                   </Typography>
                 </CardContent>
                 <CardActions>
-                <Link href="#char">
-              <StyledButton style={{fontSize: 20, width: "auto"}}>See The Characters</StyledButton>
-              </Link>
-            </CardActions>
+                  <Link href="#char">
+                    <StyledButton style={{ fontSize: 20, width: "auto" }}>
+                      See The Characters
+                    </StyledButton>
+                  </Link>
+                </CardActions>
               </Card>
 
               <Card
@@ -807,7 +826,7 @@ function App() {
                   margin: "2%",
                   padding: "4.5%",
                   backgroundColor: "#FEF7E9",
-                  height: 425
+                  height: 450,
                 }}
               >
                 <CardMedia>
@@ -821,16 +840,21 @@ function App() {
                     ERC-721
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    The Baebees NFT Contract That Governs Ownership Is A
-                    Standard ERC-721 Which Is Compatible With Any Service Or
-                    Exchange, And Purchasing Baebee Costs 25/50 MATIC - POLYGON And 3D Costs 0.2 ETH.
+                    The Baebees NFT Contract that governs ownership is a
+                    standard ERC-721 compatible with any service or exchange.
+                    Purchasing Baebee NFT costs 25/50 MATIC - POLYGON, and 3D
+                    costs 0.2 ETH.
+                    <br />
+                    <br />
                   </Typography>
                 </CardContent>
                 <CardActions>
-                <Link href="#mint">
-              <StyledButton style={{fontSize: 20, width: "auto"}}>Mint an NFT</StyledButton>
-              </Link>
-            </CardActions>
+                  <Link href="#mint">
+                    <StyledButton style={{ fontSize: 20, width: "auto" }}>
+                      Mint an NFT
+                    </StyledButton>
+                  </Link>
+                </CardActions>
               </Card>
 
               <Card
@@ -839,7 +863,7 @@ function App() {
                   margin: "2%",
                   padding: "4%",
                   backgroundColor: "#FEF7E9",
-                  height: 425
+                  height: 450,
                 }}
               >
                 <CardMedia>
@@ -853,16 +877,20 @@ function App() {
                     Specialty
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Baebees NFTs are Convertable To Reautycoin (ERC 2.0 Token).
-                    We Allow Our NFT Owner To Convert Their NFT To Our
-                    Reautycoin, Please Check The Reautycoin Page To Learn More.
+                    Baebees NFTs are exchangeable for ReautyCoin (ERC 2.0
+                    Token). We allow our NFT owner to convert their NFT To our
+                    ReautyCoin. Please check the ReautyDAO page to learn more.
+                    <br />
+                    <br />
                   </Typography>
                 </CardContent>
                 <CardActions>
-                <Link href="https://reautydao.io">
-              <StyledButton style={{fontSize: 20, width: "auto"}}>Learn More</StyledButton>
-              </Link>
-            </CardActions>
+                  <Link href="https://reautydao.io">
+                    <StyledButton style={{ fontSize: 20, width: "auto" }}>
+                      Learn More
+                    </StyledButton>
+                  </Link>
+                </CardActions>
               </Card>
             </s.Container>
             <s.SpacerMedium />
@@ -873,7 +901,10 @@ function App() {
         <s.SpacerLarge />
         <s.SpacerLarge />
         <s.SpacerMedium />
-        <s.TextTitle style={{ fontSize: "2.5em" }} id="char">
+        <s.TextTitle
+          style={{ fontSize: "2.5em", textAlign: "center" }}
+          id="char"
+        >
           CHARACTERS
         </s.TextTitle>
         <s.SpacerMedium />
@@ -904,20 +935,27 @@ function App() {
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "33em"
+                  height: "40em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/Unreal.png"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/Unreal.png"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  Unreal Baebee
+                    Unreal Baebee
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                  At a time when the Internet unifies aesthetic standards, more and more people are undergoing plastic surgery, which is not only harmful to health but also a wrong value orientation. People should recognize their original appearance and natural charm.
+                    <br />
+                    As technology continues connecting us, people are
+                    increasingly investing in appearances. While it's exciting
+                    to have the freedom to express ourselves through fashion, it
+                    can also be harmful. Instead of being blinded by trends and
+                    clickbait images, we should focus on maintaining our natural
+                    beauty. Let's remind each other that authenticity is the
+                    most beautiful thing we can possess.
                   </Typography>
                 </CardContent>
               </Card>
@@ -927,66 +965,27 @@ function App() {
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "33em"
+                  height: "40em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/Vampire.png"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/Vampire.png"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  Contaminated Baebee
+                    Contaminated Baebee
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                  Harmful cosmetic ingredients and non-degradable packaging threaten the planet's environment and contribute to global warming.
-                   </Typography>
-                </CardContent>
-              </Card>
-              <Card
-                sx={{
-                  maxWidth: 375,
-                  margin: "1%",
-                  padding: "2%",
-                  backgroundColor: "#FEF7E9",
-                  height: "33em"
-                }}
-              >
-                <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/Zombie.png"
-            />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                  Poisoned Baebee
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                  Harmful ingredients in cosmetics are invading our health, and their advertising slogans are corroding our minds.
-                   </Typography>
-                </CardContent>
-              </Card>
-              <Card
-                sx={{
-                  maxWidth: 375,
-                  margin: "1%",
-                  padding: "2%",
-                  backgroundColor: "#FEF7E9",
-                  height: "33em"
-                }}
-              >
-                <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/Frida1.png"
-            />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                  Mask Baebee
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                  Today's global society is gradually losing diversity; everyone wears a mask and becomes what the mainstream likes the mainstream demands, and behind this is the destruction of individuality.
+                    <br />
+                    It's shocking to think how much harm some beauty products
+                    and non-biodegradable packaging can do to the environment.
+                    It's time for beauty brands to step up and take action by
+                    transitioning to more eco-friendly alternatives. It's up to
+                    us as consumers to demand this shift, and we can use our
+                    voices to show brands which practices we support and which
+                    we don't.
                   </Typography>
                 </CardContent>
               </Card>
@@ -996,21 +995,29 @@ function App() {
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "33em"
+                  height: "40em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/Clown.png"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/Zombie.png"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  Joker Baebee
+                    Poisoned Baebee
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                 Exaggerated advertisements and deformed aesthetics have created real-life clowns; the pain of plastic surgery failure and the poisoning of harmful cosmetics have turned the victim into another joker.
-                   </Typography>
+                    <br />
+                    As consumers, we're all constantly faced with many choices
+                    about what we buy and put in our bodies. But many beauty
+                    products are filled with harmful chemicals that can affect
+                    our health. And their advertising slogans, designed to
+                    appeal to our vanity, are corroding our minds. We're sick of
+                    being brainwashed into believing that these products are
+                    harmless. It's time to change this. Let's start by choosing
+                    brands that use safe, natural ingredients.
+                  </Typography>
                 </CardContent>
               </Card>
               <Card
@@ -1019,29 +1026,94 @@ function App() {
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "33em"
+                  height: "40em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/Fire.png"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/Frida1.png"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  Fire Baebee
+                    Mask Baebee
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                  The fake beauty information, misleading advertisement, trials, and errors burn a lot of energy from us; we can not get what we want exactly, and the anger fire is coming up.
+                    <br />
+                    What used to be a diverse and inclusive global society is
+                    slowly disappearing. Everyone seems to be wearing the same
+                    mask, conforming to what the mainstream likes, and losing
+                    their individuality. This is a dangerous trend; if we don't
+                    act now, we will lose the things that make us unique. Let's
+                    celebrate our differences and preserve our individuality.
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "40em",
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height="260"
+                  image="/config/images/Clown.png"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    Joker Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <br />
+                    Exaggerated advertisements and deformed aesthetics have
+                    created real-life clowns. The innocence and charm that once
+                    distinguished these statues have been replaced by pain and
+                    fear. Plastic surgery went wrong, and the poisoning of
+                    harmful cosmetics has turned the victim into just another
+                    joker. #BeautyIsNotScary #RealClowns #PlasticSurgeries
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                sx={{
+                  maxWidth: 375,
+                  margin: "1%",
+                  padding: "2%",
+                  backgroundColor: "#FEF7E9",
+                  height: "40em",
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height="260"
+                  image="/config/images/Fire.png"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    Fire Baebee
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <br />
+                    Sometimes, it feels like we're wasting our time and energy
+                    on fake beauty info, misleading ads, and failed trials. It
+                    doesn't help that the flames of anger come up when you get
+                    upset. But it's important to remember that we're not alone.
+                    We can all support each other as we navigate this crazy
+                    beauty industry.
                   </Typography>
                 </CardContent>
               </Card>
             </s.Container>
-            </s.Container>
-           </ResponsiveLow>
-
-           <s.TextTitle style={{ fontSize: "2.5em" }}>
-          3D TOXIC BAEBEES
+          </s.Container>
+        </ResponsiveLow>
+        <s.SpacerMedium />
+        <s.SpacerMedium />
+        <s.TextTitle style={{ fontSize: "2.5em", textAlign: "center" }}>
+          3D TOXIC BAEBEES - LIMITED EDITION
         </s.TextTitle>
         <s.SpacerMedium />
         <s.SpacerMedium />
@@ -1071,32 +1143,44 @@ function App() {
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "50em"
+                  height: "50em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/3d.gif"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/3d.gif"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  Reauty DAO
+                    Reauty DAO
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                  <br/><br/>
-                  We're so proud to introduce Reauty DAO to the world!
-                  
-<br/><br/>
-Creating a truly decentralized and trustworthy beauty community is vital for every beauty stakeholder worldwide, and we're excited to lead this disruptive beauty transformation. 
-<br/><br/><br/><br/><br/><br/><br/><br/>
-</Typography>
+                    We're so proud to introduce Reauty DAO to the world!
+                    <br />
+                    <br />
+                    Reauty DAO community empowers all members with ownership,
+                    control, and monetization of their beauty-relevant data.
+                    Overall, community members have the power to build a new
+                    order in the beauty industry with transparency,
+                    inclusiveness, and authenticity supported by blockchain
+                    technology!
+                    <br />
+                    <br />
+                    Creating a truly decentralized and trustworthy beauty
+                    community is vital for every beauty stakeholder worldwide,
+                    and we're excited to lead this disruptive beauty
+                    transformation.
+                    <br />
+                  </Typography>
                 </CardContent>
                 <CardActions>
-              <Link href="https://reautydao.io">
-              <StyledButton style={{fontSize: 20, width: "auto"}}>Learn More</StyledButton>
-              </Link>
-            </CardActions>
+                  <Link href="https://reautydao.io">
+                    <StyledButton style={{ fontSize: 20, width: "auto" }}>
+                      Learn More
+                    </StyledButton>
+                  </Link>
+                </CardActions>
               </Card>
               <Card
                 sx={{
@@ -1104,29 +1188,43 @@ Creating a truly decentralized and trustworthy beauty community is vital for eve
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "50em"
+                  height: "50em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/3d1.gif"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/3d1.gif"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  Why NFTs?
+                    Why NFTs?
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                  <br /><br />
-The beauty industry needs to do better. We see firsthand how misleading marketing claims, exaggerated claims, and unrealistic expectations lead to unhealthy choices for our customers. That's why we're launching the first NFT series: Toxic Baebaee! Each variation is entirely customizable with 3D, Pixelated, and 2D so you can choose the best look. This NFT series will help raise awareness of the toxic beauty industry while empowering consumers to make healthier choices. 
-<br /><br /><br /><br />
- </Typography>
+                    <br />
+                    <br />
+                    The beauty industry needs to do better. We see firsthand how
+                    misleading marketing claims, exaggerated claims, and
+                    unrealistic expectations lead to unhealthy choices for our
+                    customers. That's why we're launching the first NFT series:
+                    Toxic Baebaee! Each variation is entirely customizable with
+                    3D, Pixelated, and 2D so you can choose the best look. This
+                    NFT series will help raise awareness of the toxic beauty
+                    industry while empowering consumers to make healthier
+                    choices.
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                  </Typography>
                 </CardContent>
                 <CardActions>
-                <Link href="#mint">
-              <StyledButton style={{fontSize: 20, width: "auto"}}>Mint Now</StyledButton>
-              </Link>
-            </CardActions>
+                  <Link href="#mint">
+                    <StyledButton style={{ fontSize: 20, width: "auto" }}>
+                      Mint Now
+                    </StyledButton>
+                  </Link>
+                </CardActions>
               </Card>
               <Card
                 sx={{
@@ -1134,38 +1232,48 @@ The beauty industry needs to do better. We see firsthand how misleading marketin
                   margin: "1%",
                   padding: "2%",
                   backgroundColor: "#FEF7E9",
-                  height: "50em"
+                  height: "50em",
                 }}
               >
                 <CardMedia
-              component="img"
-              height="260"
-              image="/config/images/3d3.gif"
-            />
+                  component="img"
+                  height="260"
+                  image="/config/images/3d3.gif"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                  NFT Purchase = DAO Membership
+                    NFT Purchase = DAO Membership
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    <br /><br />
-                  It's Halloween season, and we're celebrating by slashing prices on Toxic Baebee NFTs from midnight on 31st Oct 2022 until 30th Nov 2022! <br/><br/>
-The first 100 Toxic Baebee NFT owners will get 0.1 ETH worth of Reauty DAO membership, giving them access to all the community privileges and powers to improve the web3 beauty community. Don't miss out on this spooky deal!
-<br /><br /><br />
-             </Typography>
+                    <br />
+                    <br />
+                    It's Halloween season, and we're celebrating by slashing
+                    prices on Toxic Baebee NFTs from midnight on 31st Oct 2022
+                    until 30th Nov 2022! <br />
+                    <br />
+                    The first 100 Toxic Baebee NFT owners will get 0.1 ETH worth
+                    of Reauty DAO membership, giving them access to all the
+                    community privileges and powers to improve the web3 beauty
+                    community. Don't miss out on this spooky deal!
+                    <br />
+                    <br />
+                    <br />
+                  </Typography>
                 </CardContent>
                 <CardActions>
-              <Link href="https://opensea.io/collection/3d-toxic-baebee">
-              <StyledButton style={{fontSize: 20, width: "auto"}}>Purchase on Opensea</StyledButton>
-              </Link>
-            </CardActions>
+                  <Link href="https://opensea.io/collection/3d-toxic-baebee">
+                    <StyledButton style={{ fontSize: 20, width: "auto" }}>
+                      Purchase on Opensea
+                    </StyledButton>
+                  </Link>
+                </CardActions>
               </Card>
             </s.Container>
-            </s.Container>
-           </ResponsiveLow>
-
+          </s.Container>
+        </ResponsiveLow>
 
         <s.SpacerLarge />
-        <s.TextTitle style={{ fontSize: "2.5em" }}>
+        <s.TextTitle style={{ fontSize: "2.5em", textAlign: "center" }}>
           RECENT MINTS
         </s.TextTitle>
         <s.SpacerLarge />
@@ -1208,7 +1316,7 @@ The first 100 Toxic Baebee NFT owners will get 0.1 ETH worth of Reauty DAO membe
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-              Pixelated Toxic Baebee #1
+                Pixelated Toxic Baebee #1
               </Typography>
             </CardContent>
             <CardActions>
@@ -1244,7 +1352,7 @@ The first 100 Toxic Baebee NFT owners will get 0.1 ETH worth of Reauty DAO membe
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-              Pixelated Toxic Baebee #2
+                Pixelated Toxic Baebee #2
               </Typography>
             </CardContent>
             <CardActions>
@@ -1280,7 +1388,7 @@ The first 100 Toxic Baebee NFT owners will get 0.1 ETH worth of Reauty DAO membe
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-              Pixelated Toxic Baebee #3
+                Pixelated Toxic Baebee #3
               </Typography>
             </CardContent>
             <CardActions>
