@@ -208,16 +208,21 @@ function App() {
 
   const claimNFTs = (a) => {
     let cost = 0;
+    let contractAddress = "";
     if (a == true){
         setShowPixelmint(true)
         cost = 50000000000000000000
+        contractAddress = "0x527F243B04fcaDaA6f6244F65d451bDeA8cBFa92"
     } else {
       setShow2Dmint(true)
       cost = CONFIG.WEI_COST;
+      contractAddress = CONFIG.CONTRACT_ADDRESS
     }
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
+    console.log(CONFIG.CONTRACT_ADDRESS)
+    console.log(contractAddress)
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
@@ -226,7 +231,7 @@ function App() {
       .mint(mintAmount)
       .send({
         gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
+        to: contractAddress,
         from: blockchain.account,
         value: totalCostWei,
       })
