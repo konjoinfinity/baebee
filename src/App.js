@@ -306,7 +306,7 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ background: "linear-gradient(#FFAB9C, #FEF7E9)" }}
+        style={{ background: "linear-gradient(#FEF7E9, #FFAB9C)" }}
       >
         <s.Container
           flex={1}
@@ -328,15 +328,12 @@ function App() {
             </s.Container>
           </a>
         </s.Container>
-        <s.Container>
-          <Img alt={"halloween"} src={"/config/images/hw2.gif"}></Img>
-        </s.Container>
         <s.SpacerLarge />
         <s.TextTitle
           style={{ fontSize: "2.5em", textAlign: "center" }}
           id="mint"
         >
-          TOXIC BAEBEE NFTS
+          BEAUTY BAEBEE NFTS
         </s.TextTitle>
         <s.TextTitle
           style={{
@@ -365,7 +362,7 @@ function App() {
               maxWidth: 500,
               maxHeight: "50%",
               padding: "2%",
-              backgroundColor: "#FEF7E9",
+              backgroundColor: "#F9CFCB",
             }}
           >
             <CardContent>
@@ -539,7 +536,7 @@ function App() {
           </Card>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+            <StyledImg alt={"example"} src={"/config/images/85.gif"} />
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerLarge />
@@ -744,7 +741,7 @@ function App() {
           </Card>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/pixelated.gif"} />
+            <StyledImg alt={"example"} src={"/config/images/4988.png"} />
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerLarge />
@@ -941,11 +938,11 @@ function App() {
                 <CardMedia
                   component="img"
                   height="260"
-                  image="/config/images/Unreal.png"
+                  image="/config/images/Cat.png"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Unreal Baebee
+                    Cat
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     <br />
@@ -971,11 +968,11 @@ function App() {
                 <CardMedia
                   component="img"
                   height="260"
-                  image="/config/images/Vampire.png"
+                  image="/config/images/Fish.png"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Contaminated Baebee
+                    Fish
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     <br />
@@ -1001,11 +998,11 @@ function App() {
                 <CardMedia
                   component="img"
                   height="260"
-                  image="/config/images/Zombie.png"
+                  image="/config/images/Flower.png"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Poisoned Baebee
+                    Flower
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     <br />
@@ -1032,11 +1029,11 @@ function App() {
                 <CardMedia
                   component="img"
                   height="260"
-                  image="/config/images/Frida1.png"
+                  image="/config/images/Kid.png"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Mask Baebee
+                    Kid
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     <br />
@@ -1061,11 +1058,11 @@ function App() {
                 <CardMedia
                   component="img"
                   height="260"
-                  image="/config/images/Clown.png"
+                  image="/config/images/Leaf.png"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Joker Baebee
+                    Leaf
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     <br />
@@ -1090,11 +1087,11 @@ function App() {
                 <CardMedia
                   component="img"
                   height="260"
-                  image="/config/images/Fire.png"
+                  image="/config/images/Rainbow.png"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Fire Baebee
+                    Rainbow
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     <br />
